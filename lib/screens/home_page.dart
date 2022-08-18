@@ -16,85 +16,87 @@ class HomePage extends StatelessWidget {
     double avatarRadius = screenWidth / 6;
     double heroSectionHeight = screenHeight / 3;
 
-    return Scaffold(
-      key: _key,
-      drawer: HomeDrawer(
-        avatarRadius: avatarRadius,
-      ),
-      body: Stack(
-        children: [
-          Column(
-            children: <Widget>[
-              ClipRRect(
-                borderRadius: const BorderRadius.only(
-                  bottomLeft: Radius.circular(20),
-                  bottomRight: Radius.circular(20),
-                ),
-                child: SizedBox(
-                  height: heroSectionHeight,
-                  width: double.infinity,
-                  child: Image.asset(
-                    'assets/hero_section.jpeg',
-                    fit: BoxFit.cover,
+    return SafeArea(
+      child: Scaffold(
+        key: _key,
+        drawer: HomeDrawer(
+          avatarRadius: avatarRadius,
+        ),
+        body: Stack(
+          children: [
+            Column(
+              children: <Widget>[
+                ClipRRect(
+                  borderRadius: const BorderRadius.only(
+                    bottomLeft: Radius.circular(20),
+                    bottomRight: Radius.circular(20),
+                  ),
+                  child: SizedBox(
+                    height: heroSectionHeight,
+                    width: double.infinity,
+                    child: Image.asset(
+                      'assets/hero_section.jpeg',
+                      fit: BoxFit.cover,
+                    ),
                   ),
                 ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                  vertical: 30,
-                ),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    const Date(),
-                    Text(
-                      'Semester-3',
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline6!
-                          .copyWith(fontWeight: FontWeight.bold),
-                    ),
-                  ],
-                ),
-              )
-            ],
-          ),
-          // avatar image
-          Positioned(
-            top: heroSectionHeight - avatarRadius,
-            left: (screenWidth) * 0.5 - avatarRadius,
-            child: Avatar(avatarRadius: avatarRadius),
-          ),
-          // drawer opener
-          Positioned(
-            top: 20,
-            left: 20,
-            child: IconButton(
-              icon: const Icon(Icons.menu),
-              onPressed: () {
-                _key.currentState!.openDrawer();
-              },
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 30,
+                  ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Date(),
+                      Text(
+                        'Semester-3',
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline6!
+                            .copyWith(fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                )
+              ],
             ),
-          ),
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.search),
-            label: 'Search',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Profile',
-          ),
-        ],
+            // avatar image
+            Positioned(
+              top: heroSectionHeight - avatarRadius,
+              left: (screenWidth) * 0.5 - avatarRadius,
+              child: Avatar(avatarRadius: avatarRadius),
+            ),
+            // drawer opener
+            Positioned(
+              top: 20,
+              left: 20,
+              child: IconButton(
+                icon: const Icon(Icons.menu),
+                onPressed: () {
+                  _key.currentState!.openDrawer();
+                },
+              ),
+            ),
+          ],
+        ),
+        bottomNavigationBar: BottomNavigationBar(
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Home',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.search),
+              label: 'Search',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.person),
+              label: 'Profile',
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -31,10 +31,11 @@ class BandCard extends StatelessWidget {
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
-                color: currentThemeDark ? Colors.black : Colors.white,
+                color: !currentThemeDark ? Colors.black : Colors.white,
                 spreadRadius: 1,
                 blurRadius: 10,
-                offset: const Offset(0, -5),
+                offset: const Offset(0, 0),
+                blurStyle: BlurStyle.outer,
               ),
             ],
             color: Colors.grey.withOpacity(0.1),
