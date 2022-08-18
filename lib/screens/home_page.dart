@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/instance_manager.dart';
-import 'package:nsutx/Controllers/theme_controller.dart';
+import 'package:get/get.dart';
+import 'package:nsutx/widgets/date_widget.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -9,10 +9,11 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-    double avatarRadius = screenWidth / 4;
+    double avatarRadius = screenWidth / 6;
     double heroSectionHeight = screenHeight / 3;
 
     return Scaffold(
+      drawer: const Drawer(),
       body: Stack(
         children: [
           Column(
@@ -31,24 +32,34 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
               ),
-              TextButton(
-                child: const Text('Change Theme'),
-                onPressed: () {
-                  Get.find<ThemeController>().toggleTheme();
-                },
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 10,
+                  vertical: 30,
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    const Date(),
+                    Text(
+                      'Semester-3',
+                      style: Theme.of(Get.context!)
+                          .textTheme
+                          .titleLarge!
+                          .copyWith(fontWeight: FontWeight.bold),
+                    ),
+                  ],
+                ),
               )
             ],
           ),
           Positioned(
-            top: heroSectionHeight - avatarRadius / 2,
-            left: (screenWidth - avatarRadius) * 0.5,
-            child: Container(
-              height: avatarRadius,
-              width: avatarRadius,
-              decoration: const BoxDecoration(
-                color: Colors.red,
-                shape: BoxShape.circle,
-              ),
+            top: heroSectionHeight - avatarRadius,
+            left: (screenWidth) * 0.5 - avatarRadius,
+            child: CircleAvatar(
+              radius: avatarRadius,
+              backgroundImage: const AssetImage('assets/avatar.png'),
             ),
           ),
         ],
