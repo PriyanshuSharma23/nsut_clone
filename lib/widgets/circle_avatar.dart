@@ -16,9 +16,13 @@ class Avatar extends StatelessWidget {
         Get.toNamed('/profile');
       },
       child: CircleAvatar(
-          radius: avatarRadius,
-          backgroundImage: const AssetImage('assets/avatar.png'),
-          backgroundColor: Colors.grey),
+        radius: avatarRadius,
+        backgroundColor: Colors.grey,
+        child: ClipRRect(
+          borderRadius: BorderRadius.circular(avatarRadius),
+          child: Image.asset('assets/avatar.jpeg'),
+        ),
+      ),
     );
   }
 }

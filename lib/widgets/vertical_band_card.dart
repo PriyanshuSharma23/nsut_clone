@@ -2,6 +2,8 @@ import 'dart:ui';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nsutx/theme/dark_theme.dart';
+import 'package:nsutx/theme/light_theme.dart';
 
 import '../Controllers/theme_controller.dart';
 
@@ -29,14 +31,13 @@ class BandCard extends StatelessWidget {
         filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
         child: Container(
           decoration: BoxDecoration(
-            boxShadow: [
-              BoxShadow(
-                color: !currentThemeDark ? Colors.black : Colors.white,
-                spreadRadius: 1,
-                blurRadius: 10,
-                offset: const Offset(0, 0),
-                blurStyle: BlurStyle.outer,
-              ),
+            boxShadow: const [
+              // subtle shadow
+              // BoxShadow(
+              //   color: currentThemeDark ? primaryDark : primaryLight,
+              //   offset: const Offset(0, 5),
+              //   blurRadius: 10,
+              // )
             ],
             color: Colors.grey.withOpacity(0.1),
             border: BorderDirectional(

@@ -10,15 +10,22 @@ class DarkTheme with BaseTheme {
     final theme = ThemeData.dark();
 
     return theme.copyWith(
-      primaryColor: primaryDark,
-      scaffoldBackgroundColor: primaryDark,
-      textTheme: font().apply(
-        displayColor: Colors.white,
-        bodyColor: Colors.white,
-      ),
-      iconTheme: const IconThemeData(
-        color: Colors.white,
-      ),
-    );
+        primaryColor: primaryDark,
+        scaffoldBackgroundColor: primaryDark,
+        textTheme: font().apply(
+          displayColor: Colors.white,
+          bodyColor: Colors.white,
+        ),
+        iconTheme: const IconThemeData(
+          color: Colors.white,
+        ),
+        drawerTheme: theme.drawerTheme.copyWith(
+          backgroundColor: primaryDark,
+        ),
+        bottomNavigationBarTheme: theme.bottomNavigationBarTheme.copyWith(
+          backgroundColor: primaryDark,
+          elevation: 2,
+          selectedItemColor: secondaryDark,
+        ));
   }
 }

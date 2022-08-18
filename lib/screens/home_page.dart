@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:nsutx/Controllers/profile_controller.dart';
+import 'package:nsutx/Controllers/theme_controller.dart';
 import 'package:nsutx/constants.dart';
 
 import 'package:nsutx/widgets/date_widget.dart';
 import 'package:nsutx/widgets/icon.dart';
+import 'package:nsutx/widgets/vertical_band_card.dart';
 
 import '../widgets/circle_avatar.dart';
-import '../widgets/theme_button.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({Key? key}) : super(key: key);
@@ -23,6 +26,7 @@ class HomePage extends StatelessWidget {
         key: _key,
         drawer: HomeDrawer(
           avatarRadius: avatarRadius,
+          screenHeight: screenHeight,
         ),
         body: Stack(
           children: [
@@ -65,7 +69,7 @@ class HomePage extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Wrap(
-                    alignment: WrapAlignment.spaceBetween,
+                    alignment: WrapAlignment.spaceEvenly,
                     spacing: 20,
                     runSpacing: 20,
                     children: actions
@@ -118,25 +122,102 @@ class HomePage extends StatelessWidget {
 
 class HomeDrawer extends StatelessWidget {
   final double avatarRadius;
+  final double screenHeight;
   const HomeDrawer({
     Key? key,
     required this.avatarRadius,
+    required this.screenHeight,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      child: Stack(
-        children: [
-          Center(
-            child: Avatar(avatarRadius: avatarRadius),
-          ),
-          Column(
-            children: const [],
-          ),
-          // theme changing button
-          const Positioned(child: ThemeButton()),
-        ],
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: ListView.separated(
+          itemBuilder: (BuildContext context, int index) {
+            if (index == 0) {
+              return SizedBox(
+                height: screenHeight / 3,
+                child: Stack(children: [
+                  Align(
+                    alignment: Alignment.center,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Avatar(
+                            avatarRadius: avatarRadius,
+                          ),
+                        ),
+                        Obx(
+                          () => Text(
+                            Get.find<ProfileController>()
+                                .profileModel
+                                .value
+                                .studentName
+                                .toUpperCase(),
+                            style:
+                                Theme.of(context).textTheme.headline6!.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Obx(
+                          () => Text(
+                            Get.find<ProfileController>()
+                                .profileModel
+                                .value
+                                .studentID,
+                            style:
+                                Theme.of(context).textTheme.subtitle1!.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.topRight,
+                    child: IconButton(
+                      onPressed: () {
+                        Get.find<ThemeController>().toggleTheme();
+                      },
+                      icon: Get.theme.brightness == Brightness.dark
+                          ? const Icon(Icons.dark_mode)
+                          : const Icon(Icons.light_mode),
+                    ),
+                  ),
+                ]),
+              );
+            }
+
+            return BandCard(
+                child: Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
+              child: GestureDetector(
+                onTap: () {
+                  Get.toNamed(actions[index - 1].to);
+                },
+                child: Text(
+                  actions[index - 1].name,
+                  style: Get.theme.textTheme.headline6,
+                ),
+              ),
+            ));
+          },
+          separatorBuilder: (BuildContext context, int index) {
+            return const SizedBox(
+              height: 10,
+            );
+          },
+          itemCount: actions.length + 1,
+        ),
       ),
     );
   }

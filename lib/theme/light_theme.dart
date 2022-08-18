@@ -28,6 +28,14 @@ class LightTheme with BaseTheme {
           color: Colors.black,
         ),
       ),
+      drawerTheme: theme.drawerTheme.copyWith(
+        backgroundColor: primaryLight,
+      ),
+      bottomNavigationBarTheme: theme.bottomNavigationBarTheme.copyWith(
+        backgroundColor: primaryLight,
+        elevation: 2,
+        selectedItemColor: secondaryLight,
+      ),
     );
   }
 }
