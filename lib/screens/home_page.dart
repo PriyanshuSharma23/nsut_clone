@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:nsutx/widgets/date_widget.dart';
 
+import '../widgets/circle_avtar.dart';
 import '../widgets/theme_button.dart';
 
 class HomePage extends StatelessWidget {
@@ -64,10 +65,7 @@ class HomePage extends StatelessWidget {
           Positioned(
             top: heroSectionHeight - avatarRadius,
             left: (screenWidth) * 0.5 - avatarRadius,
-            child: CircleAvatar(
-                radius: avatarRadius,
-                backgroundImage: const AssetImage('assets/avatar.png'),
-                backgroundColor: Colors.grey),
+            child: Avatar(avatarRadius: avatarRadius),
           ),
           // drawer opener
           Positioned(
@@ -115,11 +113,7 @@ class HomeDrawer extends StatelessWidget {
       child: Stack(
         children: [
           Center(
-            child: CircleAvatar(
-              radius: avatarRadius,
-              backgroundImage: const AssetImage('assets/avatar.png'),
-              backgroundColor: Colors.grey,
-            ),
+            child: Avatar(avatarRadius: avatarRadius),
           ),
           Column(
             children: const [],
