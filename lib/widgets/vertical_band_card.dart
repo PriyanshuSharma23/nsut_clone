@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nsutx/theme/dark_theme.dart';
@@ -25,21 +23,23 @@ class BandCard extends StatelessWidget {
       c = lightThemeColor;
     }
 
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(20),
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
+    return Container(
+      decoration: BoxDecoration(
+        boxShadow: [
+          // subtle shadow
+          BoxShadow(
+            color: currentThemeDark ? Colors.black : Colors.grey,
+            offset: const Offset(6, 10),
+            spreadRadius: -20,
+            blurRadius: 20,
+          )
+        ],
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(20),
         child: Container(
           decoration: BoxDecoration(
-            boxShadow: const [
-              // subtle shadow
-              // BoxShadow(
-              //   color: currentThemeDark ? primaryDark : primaryLight,
-              //   offset: const Offset(0, 5),
-              //   blurRadius: 10,
-              // )
-            ],
-            color: Colors.grey.withOpacity(0.1),
+            color: currentThemeDark ? primaryDark : primaryLight,
             border: BorderDirectional(
               start: BorderSide(
                 color: c,
