@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+
 import 'package:nsutx/widgets/date_widget.dart';
 
+import '../widgets/theme_button.dart';
+
 class HomePage extends StatelessWidget {
-  const HomePage({Key? key}) : super(key: key);
+  HomePage({Key? key}) : super(key: key);
+  final GlobalKey<ScaffoldState> _key = GlobalKey(); // Create a key
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +16,10 @@ class HomePage extends StatelessWidget {
     double heroSectionHeight = screenHeight / 3;
 
     return Scaffold(
-      drawer: const Drawer(),
+      key: _key,
+      drawer: HomeDrawer(
+        avatarRadius: avatarRadius,
+      ),
       body: Stack(
         children: [
           Column(
@@ -44,9 +50,9 @@ class HomePage extends StatelessWidget {
                     const Date(),
                     Text(
                       'Semester-3',
-                      style: Theme.of(Get.context!)
+                      style: Theme.of(context)
                           .textTheme
-                          .titleLarge!
+                          .headline6!
                           .copyWith(fontWeight: FontWeight.bold),
                     ),
                   ],
@@ -54,12 +60,24 @@ class HomePage extends StatelessWidget {
               )
             ],
           ),
+          // avatar image
           Positioned(
             top: heroSectionHeight - avatarRadius,
             left: (screenWidth) * 0.5 - avatarRadius,
             child: CircleAvatar(
-              radius: avatarRadius,
-              backgroundImage: const AssetImage('assets/avatar.png'),
+                radius: avatarRadius,
+                backgroundImage: const AssetImage('assets/avatar.png'),
+                backgroundColor: Colors.grey),
+          ),
+          // drawer opener
+          Positioned(
+            top: 20,
+            left: 20,
+            child: IconButton(
+              icon: const Icon(Icons.menu),
+              onPressed: () {
+                _key.currentState!.openDrawer();
+              },
             ),
           ),
         ],
@@ -78,6 +96,36 @@ class HomePage extends StatelessWidget {
             icon: Icon(Icons.person),
             label: 'Profile',
           ),
+        ],
+      ),
+    );
+  }
+}
+
+class HomeDrawer extends StatelessWidget {
+  final double avatarRadius;
+  const HomeDrawer({
+    Key? key,
+    required this.avatarRadius,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Drawer(
+      child: Stack(
+        children: [
+          Center(
+            child: CircleAvatar(
+              radius: avatarRadius,
+              backgroundImage: const AssetImage('assets/avatar.png'),
+              backgroundColor: Colors.grey,
+            ),
+          ),
+          Column(
+            children: const [],
+          ),
+          // theme changing button
+          const Positioned(child: ThemeButton()),
         ],
       ),
     );

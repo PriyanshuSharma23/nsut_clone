@@ -6,12 +6,16 @@ const primaryDark = Color(0xFF1B1F2B);
 const secondaryLight = Color(0xFFFB6487);
 
 class DarkTheme with BaseTheme {
-  generateTheme() {
+  ThemeData generateTheme() {
     final theme = ThemeData.dark();
+
     return theme.copyWith(
       primaryColor: primaryDark,
       scaffoldBackgroundColor: primaryDark,
-      textTheme: font(),
+      textTheme: font().apply(
+        displayColor: Colors.white,
+        bodyColor: Colors.white,
+      ),
       iconTheme: const IconThemeData(
         color: Colors.white,
       ),

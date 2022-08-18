@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:get/get.dart';
 
 import 'package:nsutx/app_routes.dart';
@@ -12,10 +13,18 @@ void main() {
   // ensure that the initial bindings are set
   InitialBindings().dependencies();
 
-  runApp(Obx(() {
-    return GetMaterialApp(
-      theme: Get.find<ThemeController>().themeData,
-      getPages: appRoutes,
-    );
-  }));
+  // check device default theme
+  var brightness = SchedulerBinding.instance.window.platformBrightness;
+  if (brightness == Brightness.dark) {
+    Get.find<ThemeController>().toggleTheme();
+  }
+
+  runApp(
+    Obx(
+      () => GetMaterialApp(
+        theme: Get.find<ThemeController>().themeData,
+        getPages: appRoutes,
+      ),
+    ),
+  );
 }

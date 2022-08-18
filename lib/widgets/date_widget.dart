@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:nsutx/Controllers/theme_controller.dart';
 import 'package:nsutx/utils/day.dart';
 
 class Date extends StatelessWidget {
@@ -12,13 +13,13 @@ class Date extends StatelessWidget {
       children: [
         Text(
           Day.todaysDay(),
-          style: Theme.of(Get.context!).textTheme.titleMedium!.copyWith(
+          style: Theme.of(context).textTheme.titleMedium!.copyWith(
                 fontWeight: FontWeight.bold,
               ),
         ),
         Text(
           Day.todaysDate(),
-          style: Theme.of(Get.context!).textTheme.titleSmall,
+          style: Get.find<ThemeController>().themeData.textTheme.caption,
         ),
       ],
     );
