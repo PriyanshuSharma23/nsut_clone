@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,28 +15,41 @@ class BandCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Color c;
-    final currentTheme = Get.find<ThemeController>().themeData;
-    if (currentTheme.brightness == Brightness.dark) {
+    final currentThemeDark =
+        Get.find<ThemeController>().themeData.brightness == Brightness.dark;
+    if (currentThemeDark) {
       c = darkThemeColor;
     } else {
       c = lightThemeColor;
     }
 
     return ClipRRect(
-      borderRadius: BorderRadius.circular(5),
-      child: Container(
-        decoration: BoxDecoration(
-          border: BorderDirectional(
-            start: BorderSide(
-              color: c,
-              width: 10,
+      borderRadius: BorderRadius.circular(20),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 15, sigmaY: 15),
+        child: Container(
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: currentThemeDark ? Colors.black : Colors.white,
+                spreadRadius: 1,
+                blurRadius: 10,
+                offset: const Offset(0, -5),
+              ),
+            ],
+            color: Colors.grey.withOpacity(0.1),
+            border: BorderDirectional(
+              start: BorderSide(
+                color: c,
+                width: 20,
+              ),
             ),
+            // borderRadius:
           ),
-          // borderRadius:
-        ),
-        child: Padding(
-          padding: const EdgeInsets.only(left: 8.0),
-          child: child,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 8.0),
+            child: child,
+          ),
         ),
       ),
     );
