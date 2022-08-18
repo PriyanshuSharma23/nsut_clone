@@ -1,0 +1,448 @@
+{
+    "CEECSO6": {
+        "Course Name": "Design and Analysis of Algorithms",
+        "Attendance": [
+            {
+                "Date": "01/01/2022",
+                "Classes": [
+                    {
+                        "Marked": "PRESENT",
+                        "Attendance_Given": true
+                    }
+                ]
+            },
+            {
+                "Date": "02/01/2022",
+                "Classes": [
+                    {
+                        "Marked": "ABSENT",
+                        "Attendance_Given": false
+                    },
+                    {
+                        "Marked": "PRESENT",
+                        "Attendance_Given": true
+                    }
+                ]
+            },
+            {
+                "Date": "03/01/2022",
+                "Classes": [
+                    {
+                        "Marked": "PRESENT",
+                        "Attendance_Given": true
+                    }
+                ]
+            },
+            {
+                "Date": "04/01/2022",
+                "Classes": [
+                    {
+                        "Marked": "PRESENT",
+                        "Attendance_Given": true
+                    }
+                ]
+            },
+            {
+                "Date": "05/01/2022",
+                "Classes": [
+                    {
+                        "Marked": "PRESENT",
+                        "Attendance_Given": true
+                    }
+                ]
+            },
+            {
+                "Date": "06/01/2022",
+                "Classes": [
+                    {
+                        "Marked": "ABSENT",
+                        "Attendance_Given": false
+                    }
+                ]
+            },
+            {
+                "Date": "07/01/2022",
+                "Classes": [
+                    {
+                        "Marked": "PRESENT",
+                        "Attendance_Given": true
+                    },
+                    {
+                        "Marked": "PRESENT",
+                        "Attendance_Given": true
+                    }
+                ]
+            },
+            {
+                "Date": "08/01/2022",
+                "Classes": [
+                    {
+                        "Marked": "ABSENT",
+                        "Attendance_Given": false
+                    },
+                    {
+                        "Marked": "ABSENT",
+                        "Attendance_Given": false
+                    }
+                ]
+            },
+            {
+                "Date": "09/01/2022",
+                "Classes": [
+                    {
+                        "Marked": "PRESENT",
+                        "Attendance_Given": true
+                    }
+                ]
+            },
+            {
+                "Date": "10/01/2022",
+                "Classes": [
+                    {
+                        "Marked": "ABSENT",
+                        "Attendance_Given": false
+                    }
+                ]
+            }
+        ]
+    },
+    "CEECSO7": {
+        "Course Name": "Computer Architecture & Organization",
+        "Attendance": [
+            {
+                "Date": "01/01/2022",
+                "Classes": [
+                    {
+                        "Marked": "PRESENT",
+                        "Attendance_Given": true
+                    }
+                ]
+            },
+            {
+                "Date": "02/01/2022",
+                "Classes": [
+                    {
+                        "Marked": "ABSENT",
+                        "Attendance_Given": false
+                    },
+                    {
+                        "Marked": "PRESENT",
+                        "Attendance_Given": true
+                    }
+                ]
+            },
+            {
+                "Date": "03/01/2022",
+                "Classes": [
+                    {
+                        "Marked": "PRESENT",
+                        "Attendance_Given": true
+                    }
+                ]
+            },
+            {
+                "Date": "04/01/2022",
+                "Classes": [
+                    {
+                        "Marked": "PRESENT",
+                        "Attendance_Given": true
+                    }
+                ]
+            },
+            {
+                "Date": "05/01/2022",
+                "Classes": [
+                    {
+                        "Marked": "PRESENT",
+                        "Attendance_Given": true
+                    }
+                ]
+            },
+            {
+                "Date": "06/01/2022",
+                "Classes": [
+                    {
+                        "Marked": "ABSENT",
+                        "Attendance_Given": false
+                    }
+                ]
+            },
+            {
+                "Date": "07/01/2022",
+                "Classes": [
+                    {
+                        "Marked": "PRESENT",
+                        "Attendance_Given": true
+                    },
+                    {
+                        "Marked": "PRESENT",
+                        "Attendance_Given": true
+                    }
+                ]
+            }
+        ]
+    },
+    "CEECSO8": {
+        "Course Name": "Web Technology",
+        "Attendance": [
+            {
+                "Date": "01/01/2022",
+                "Classes": [
+                    {
+                        "Marked": "ABSENT",
+                        "Attendance_Given": false
+                    },
+                    {
+                        "Marked": "PRESENT",
+                        "Attendance_Given": true
+                    }
+                ]
+            },
+            {
+                "Date": "02/01/2022",
+                "Classes": [
+                    {
+                        "Marked": "ABSENT",
+                        "Attendance_Given": false
+                    },
+                    {
+                        "Marked": "PRESENT",
+                        "Attendance_Given": true
+                    }
+                ]
+            },
+            {
+                "Date": "03/01/2022",
+                "Classes": [
+                    {
+                        "Marked": "PRESENT",
+                        "Attendance_Given": true
+                    }
+                ]
+            },
+            {
+                "Date": "04/01/2022",
+                "Classes": [
+                    {
+                        "Marked": "PRESENT",
+                        "Attendance_Given": true
+                    }
+                ]
+            },
+            {
+                "Date": "05/01/2022",
+                "Classes": [
+                    {
+                        "Marked": "PRESENT",
+                        "Attendance_Given": true
+                    }
+                ]
+            },
+            {
+                "Date": "06/01/2022",
+                "Classes": [
+                    {
+                        "Marked": "ABSENT",
+                        "Attendance_Given": false
+                    }
+                ]
+            },
+            {
+                "Date": "07/01/2022",
+                "Classes": [
+                    {
+                        "Marked": "PRESENT",
+                        "Attendance_Given": true
+                    },
+                    {
+                        "Marked": "PRESENT",
+                        "Attendance_Given": true
+                    }
+                ]
+            },
+            {
+                "Date": "08/01/2022",
+                "Classes": [
+                    {
+                        "Marked": "ABSENT",
+                        "Attendance_Given": false
+                    },
+                    {
+                        "Marked": "ABSENT",
+                        "Attendance_Given": false
+                    }
+                ]
+            },
+            {
+                "Date": "09/01/2022",
+                "Classes": [
+                    {
+                        "Marked": "PRESENT",
+                        "Attendance_Given": true
+                    }
+                ]
+            },
+            {
+                "Date": "10/01/2022",
+                "Classes": [
+                    {
+                        "Marked": "PRESENT",
+                        "Attendance_Given": true
+                    }
+                ]
+            }
+        ]
+    },
+    "CEECSO9": {
+        "Course Name": "Database Management Systems",
+        "Attendance": [
+            {
+                "Date": "01/01/2022",
+                "Classes": [
+                    {
+                        "Marked": "PRESENT",
+                        "Attendance_Given": true
+                    }
+                ]
+            },
+            {
+                "Date": "02/01/2022",
+                "Classes": [
+                    {
+                        "Marked": "ABSENT",
+                        "Attendance_Given": false
+                    },
+                    {
+                        "Marked": "PRESENT",
+                        "Attendance_Given": true
+                    }
+                ]
+            },
+            {
+                "Date": "03/01/2022",
+                "Classes": [
+                    {
+                        "Marked": "PRESENT",
+                        "Attendance_Given": true
+                    }
+                ]
+            },
+            {
+                "Date": "04/01/2022",
+                "Classes": [
+                    {
+                        "Marked": "PRESENT",
+                        "Attendance_Given": true
+                    }
+                ]
+            },
+            {
+                "Date": "05/01/2022",
+                "Classes": [
+                    {
+                        "Marked": "PRESENT",
+                        "Attendance_Given": true
+                    }
+                ]
+            },
+            {
+                "Date": "06/01/2022",
+                "Classes": [
+                    {
+                        "Marked": "ABSENT",
+                        "Attendance_Given": false
+                    }
+                ]
+            },
+            {
+                "Date": "07/01/2022",
+                "Classes": [
+                    {
+                        "Marked": "PRESENT",
+                        "Attendance_Given": true
+                    },
+                    {
+                        "Marked": "PRESENT",
+                        "Attendance_Given": true
+                    }
+                ]
+            }
+        ]
+    },
+    "CEECSO10": {
+        "Course Name": "Microprocessors and Microcontrollers",
+        "Attendance": [
+            {
+                "Date": "01/01/2022",
+                "Classes": [
+                    {
+                        "Marked": "PRESENT",
+                        "Attendance_Given": true
+                    }
+                ]
+            },
+            {
+                "Date": "02/01/2022",
+                "Classes": [
+                    {
+                        "Marked": "ABSENT",
+                        "Attendance_Given": false
+                    },
+                    {
+                        "Marked": "PRESENT",
+                        "Attendance_Given": true
+                    }
+                ]
+            },
+            {
+                "Date": "03/01/2022",
+                "Classes": [
+                    {
+                        "Marked": "PRESENT",
+                        "Attendance_Given": true
+                    }
+                ]
+            },
+            {
+                "Date": "04/01/2022",
+                "Classes": [
+                    {
+                        "Marked": "PRESENT",
+                        "Attendance_Given": true
+                    }
+                ]
+            },
+            {
+                "Date": "05/01/2022",
+                "Classes": [
+                    {
+                        "Marked": "PRESENT",
+                        "Attendance_Given": true
+                    }
+                ]
+            },
+            {
+                "Date": "06/01/2022",
+                "Classes": [
+                    {
+                        "Marked": "ABSENT",
+                        "Attendance_Given": false
+                    }
+                ]
+            },
+            {
+                "Date": "07/01/2022",
+                "Classes": [
+                    {
+                        "Marked": "PRESENT",
+                        "Attendance_Given": true
+                    },
+                    {
+                        "Marked": "PRESENT",
+                        "Attendance_Given": true
+                    }
+                ]
+            }
+        ]
+    }
+}
