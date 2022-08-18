@@ -18,6 +18,16 @@ class LightTheme with BaseTheme {
       iconTheme: const IconThemeData(
         color: Colors.black,
       ),
+      appBarTheme: theme.appBarTheme.copyWith(
+        color: primaryLight,
+        elevation: 0,
+        actionsIconTheme: const IconThemeData(
+          color: Colors.black,
+        ),
+        iconTheme: const IconThemeData(
+          color: Colors.black,
+        ),
+      ),
     );
   }
 }

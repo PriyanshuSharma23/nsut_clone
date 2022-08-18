@@ -2,13 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nsutx/Controllers/profile_controller.dart';
 import 'package:nsutx/Controllers/theme_controller.dart';
+import 'package:nsutx/constants.dart';
 import 'package:nsutx/theme/dark_theme.dart';
-import 'package:nsutx/theme/light_theme.dart';
-import 'package:nsutx/widgets/circle_avtar.dart';
+import 'package:nsutx/widgets/circle_avatar.dart';
 import 'package:nsutx/widgets/vertical_band_card.dart';
+import 'package:url_launcher/url_launcher.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  var top = 0.0;
 
   @override
   Widget build(BuildContext context) {
@@ -26,29 +34,50 @@ class ProfilePage extends StatelessWidget {
           SliverAppBar(
             pinned: true,
             expandedHeight: heroSectionHeight,
-            flexibleSpace: FlexibleSpaceBar(
-              centerTitle: true,
-              title: Avatar(avatarRadius: avatarRadius),
-              background: Container(
-                // lighter contrast to the background color and shadow
-                decoration: BoxDecoration(
-                  color: isDark
-                      ? primaryDark.withAlpha(200)
-                      : primaryLight.withAlpha(200),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
-                      blurRadius: 10,
-                      spreadRadius: 5,
-                      blurStyle: BlurStyle.outer,
+            flexibleSpace: LayoutBuilder(
+                builder: (BuildContext context, BoxConstraints constraints) {
+              // print('constraints=' + constraints.toString());
+              top = constraints.biggest.height;
+              return FlexibleSpaceBar(
+                  centerTitle: true,
+                  title: AnimatedOpacity(
+                    duration: const Duration(milliseconds: 300),
+                    //opacity: top == MediaQuery.of(context).padding.top + kToolbarHeight ? 1.0 : 0.0,
+                    opacity: 1.0,
+                    child: (top > 100)
+                        ? Avatar(avatarRadius: avatarRadius)
+                        : Text(
+                            'Profile',
+                            style: Theme.of(context).textTheme.headline4,
+                          ),
+                  ),
+                  background: Container(
+                    decoration: BoxDecoration(
+                      color: isDark
+                          ? primaryDark.withAlpha(200)
+                          : Colors.grey.shade300.withAlpha(200),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.1),
+                          blurRadius: 10,
+                          spreadRadius: 5,
+                          blurStyle: BlurStyle.outer,
+                        ),
+                      ],
                     ),
-                  ],
-                ),
-              ),
-            ),
+                  ));
+            }),
             actions: [
               IconButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    if (!await launchUrl(IMS_LOGIN_URL)) {
+                      Get.snackbar(
+                        'Error',
+                        'Could not launch IMS login page',
+                        icon: const Icon(Icons.error),
+                      );
+                    }
+                  },
                   icon: const Icon(
                     Icons.open_in_new,
                   ))

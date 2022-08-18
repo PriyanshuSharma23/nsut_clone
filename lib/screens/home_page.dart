@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:nsutx/constants.dart';
 
 import 'package:nsutx/widgets/date_widget.dart';
+import 'package:nsutx/widgets/icon.dart';
 
-import '../widgets/circle_avtar.dart';
+import '../widgets/circle_avatar.dart';
 import '../widgets/theme_button.dart';
 
 class HomePage extends StatelessWidget {
@@ -59,6 +61,19 @@ class HomePage extends StatelessWidget {
                       ),
                     ],
                   ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Wrap(
+                    alignment: WrapAlignment.spaceBetween,
+                    spacing: 20,
+                    runSpacing: 20,
+                    children: actions
+                        .map((item) => CircleIcon(
+                              nameIcon: item,
+                            ))
+                        .toList(),
+                  ),
                 )
               ],
             ),
@@ -69,9 +84,8 @@ class HomePage extends StatelessWidget {
               child: Avatar(avatarRadius: avatarRadius),
             ),
             // drawer opener
-            Positioned(
-              top: 20,
-              left: 20,
+            Align(
+              alignment: Alignment.topLeft,
               child: IconButton(
                 icon: const Icon(Icons.menu),
                 onPressed: () {
