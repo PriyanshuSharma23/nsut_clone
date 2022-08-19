@@ -30,9 +30,9 @@ List<NameIcon> actions = [
     to: '/syllabus',
   ),
   NameIcon(
-    name: 'Exam',
-    icon: Icons.assignment_turned_in_rounded,
-    to: '/exam',
+    name: 'Previous Year Papers',
+    icon: Icons.content_paste_outlined,
+    to: '/previous_year_papers',
   ),
   NameIcon(
     name: 'Result',
@@ -55,30 +55,3 @@ List<NameIcon> actions = [
     to: '/events',
   ),
 ];
-
-// List<NameIcon> actions = [
-//   NameIcon(name: 'Profile', icon: Icons.person),
-  
-  
-  
-  
-  
-  
-  
-
-  
-// ];
-
-// List<NameIcon> actions = [
-//   NameIcon(name: 'Profile', icon: Icons.person, to: '/profile'),
-//   NameIcon(name: 'Attendance', icon: Icons.person_search_rounded),
-//   NameIcon(name: 'Todo', icon: Icons.checklist),
-//   NameIcon(name: 'Time Table', icon: Icons.watch_later_outlined),
-//   NameIcon(name: 'Syllabus', icon: Icons.book_rounded),
-//   NameIcon(name: 'Exam', icon: Icons.document_scanner_rounded),
-//   NameIcon(name: 'Result', icon: Icons.bar_chart_rounded),
-//   NameIcon(name: 'Courses', icon: Icons.bookmark_border_rounded),
-//   NameIcon(name: 'Societies', icon: Icons.people_outline_rounded),
-//   NameIcon(name: 'Events', icon: Icons.event_note_rounded),
-// ];
-

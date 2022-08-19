@@ -32,7 +32,14 @@ class CircleIcon extends StatelessWidget {
             icon: Icon(nameIcon.icon),
           ),
         ),
-        Text(nameIcon.name, style: Get.theme.textTheme.bodyText1),
+        Container(
+          constraints: const BoxConstraints(maxWidth: 100),
+          child: Text(
+            nameIcon.name,
+            style: Get.theme.textTheme.bodyText1,
+            textAlign: TextAlign.center,
+          ),
+        ),
       ],
     );
   }
