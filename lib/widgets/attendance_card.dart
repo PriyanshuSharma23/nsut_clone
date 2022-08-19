@@ -33,15 +33,61 @@ class _AttendanceCardState extends State<AttendanceCard> {
 
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.1),
+            blurRadius: 5,
+            spreadRadius: 1,
+            offset: const Offset(0, 2),
+          ),
+        ],
       ),
-      child: Column(
+      child: Stack(
         children: [
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            height: 100,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10.0,
+                      vertical: 5,
+                    ),
+                    child: (percentage >= MIN_ATTENDANCE_PERCENTAGE)
+                        ? Text(
+                            'Already in safe zone! Take a nap :)',
+                            style: Get.theme.textTheme.bodyText2!.copyWith(
+                              fontWeight: FontWeight.bold,
+                              color: green,
+                            ),
+                          )
+                        : Text(
+                            'You need to attend ${toSafe(_tally['present']!, _tally['total']!)} more classes to be safe!',
+                            style: Get.theme.textTheme.bodyText2!.copyWith(
+                              fontWeight: FontWeight.bold,
+                              color: red,
+                            ),
+                          ),
+                  ),
+                ],
+              ),
+            ),
+          ),
           Container(
             decoration: BoxDecoration(
               color: percentage < MIN_ATTENDANCE_PERCENTAGE ? red : green,
               borderRadius: BorderRadius.circular(10),
             ),
+            margin: const EdgeInsets.only(bottom: 25),
             child: Padding(
               padding: const EdgeInsets.all(10.0),
               child: Row(
@@ -85,36 +131,6 @@ class _AttendanceCardState extends State<AttendanceCard> {
                     backgroundColor: Colors.transparent,
                   ),
                 ],
-              ),
-            ),
-          ),
-          FractionallySizedBox(
-            widthFactor: 1,
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 10.0,
-                  vertical: 5,
-                ),
-                child: (percentage >= MIN_ATTENDANCE_PERCENTAGE)
-                    ? Text(
-                        'Already in safe zone! Take a nap :)',
-                        style: Get.theme.textTheme.bodyText2!.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: green,
-                        ),
-                      )
-                    : Text(
-                        'You need to attend ${toSafe(_tally['present']!, _tally['total']!)} more classes to be safe!',
-                        style: Get.theme.textTheme.bodyText2!.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: red,
-                        ),
-                      ),
               ),
             ),
           ),
