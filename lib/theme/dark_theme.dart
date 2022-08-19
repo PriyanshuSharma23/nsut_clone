@@ -5,6 +5,9 @@ import 'base_themes.dart';
 const primaryDark = Color(0xFF1B1F2B);
 const secondaryDark = Color(0xFFcd395d);
 
+const redDark = Color(0xffdb2b2b);
+const greenDark = Color(0xff04cd03);
+
 class DarkTheme with BaseTheme {
   ThemeData generateTheme() {
     final theme = ThemeData.dark();
@@ -21,6 +24,14 @@ class DarkTheme with BaseTheme {
         ),
         drawerTheme: theme.drawerTheme.copyWith(
           backgroundColor: primaryDark,
+        ),
+        appBarTheme: appBarTheme().copyWith(
+          iconTheme: const IconThemeData(
+            color: secondaryDark,
+          ),
+          actionsIconTheme: const IconThemeData(
+            color: secondaryDark,
+          ),
         ),
         bottomNavigationBarTheme: theme.bottomNavigationBarTheme.copyWith(
           backgroundColor: primaryDark,

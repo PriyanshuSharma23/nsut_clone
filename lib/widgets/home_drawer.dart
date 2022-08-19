@@ -73,11 +73,13 @@ final drawerActions = [
 class HomeDrawer extends StatelessWidget {
   final double avatarRadius;
   final double screenHeight;
-  const HomeDrawer({
+  HomeDrawer({
     Key? key,
     required this.avatarRadius,
     required this.screenHeight,
   }) : super(key: key);
+
+  final _profileController = Get.put(ProfileController());
 
   @override
   Widget build(BuildContext context) {
@@ -102,10 +104,7 @@ class HomeDrawer extends StatelessWidget {
                         ),
                         Obx(
                           () => Text(
-                            Get.find<ProfileController>()
-                                .profileModel
-                                .value
-                                .studentName
+                            _profileController.profileModel.value.studentName
                                 .toUpperCase(),
                             style:
                                 Theme.of(context).textTheme.headline6!.copyWith(
@@ -118,10 +117,7 @@ class HomeDrawer extends StatelessWidget {
                         ),
                         Obx(
                           () => Text(
-                            Get.find<ProfileController>()
-                                .profileModel
-                                .value
-                                .studentID,
+                            _profileController.profileModel.value.studentID,
                             style:
                                 Theme.of(context).textTheme.subtitle1!.copyWith(
                                       fontWeight: FontWeight.bold,

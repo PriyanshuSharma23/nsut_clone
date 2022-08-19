@@ -15,4 +15,12 @@ mixin BaseTheme {
       ),
     ));
   }
+
+  AppBarTheme appBarTheme() {
+    return const AppBarTheme(
+      color: Colors.transparent,
+      elevation: 0,
+      shadowColor: Colors.transparent,
+    );
+  }
 }

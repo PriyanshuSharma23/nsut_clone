@@ -18,6 +18,8 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   var top = 0.0;
 
+  final _profileController = Get.put(ProfileController());
+
   @override
   Widget build(BuildContext context) {
     // get screen dimensions
@@ -32,6 +34,9 @@ class _ProfilePageState extends State<ProfilePage> {
       child: Scaffold(
         body: CustomScrollView(slivers: [
           SliverAppBar(
+            elevation: 2,
+            shadowColor: isDark ? Colors.black : Colors.grey,
+            backgroundColor: isDark ? primaryDark : Colors.white,
             pinned: true,
             expandedHeight: heroSectionHeight,
             flexibleSpace: LayoutBuilder(
@@ -87,9 +92,7 @@ class _ProfilePageState extends State<ProfilePage> {
             () => SliverList(
               delegate: SliverChildBuilderDelegate(
                 (BuildContext context, int index) {
-                  final entry = Get.find<ProfileController>()
-                      .profileModel
-                      .value
+                  final entry = _profileController.profileModel.value
                       .toMap()
                       .entries
                       .elementAt(index);
@@ -129,11 +132,8 @@ class _ProfilePageState extends State<ProfilePage> {
                     ),
                   );
                 },
-                childCount: Get.find<ProfileController>()
-                    .profileModel
-                    .value
-                    .toMap()
-                    .length,
+                childCount:
+                    _profileController.profileModel.value.toMap().length,
               ),
             ),
           ),

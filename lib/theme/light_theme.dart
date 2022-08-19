@@ -5,6 +5,9 @@ import 'base_themes.dart';
 const primaryLight = Color(0xFFF5F5F5);
 const secondaryLight = Color(0xFFFB6487);
 
+const redLight = Color(0xffef3f3f);
+const greenLight = Color(0xff07ee05);
+
 class LightTheme with BaseTheme {
   ThemeData generateTheme() {
     final theme = ThemeData.light();
@@ -18,14 +21,14 @@ class LightTheme with BaseTheme {
       iconTheme: const IconThemeData(
         color: Colors.black,
       ),
-      appBarTheme: theme.appBarTheme.copyWith(
+      appBarTheme: appBarTheme().copyWith(
         color: primaryLight,
         elevation: 0,
         actionsIconTheme: const IconThemeData(
-          color: Colors.black,
+          color: secondaryLight,
         ),
         iconTheme: const IconThemeData(
-          color: Colors.black,
+          color: secondaryLight,
         ),
       ),
       drawerTheme: theme.drawerTheme.copyWith(
