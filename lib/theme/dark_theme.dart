@@ -5,8 +5,8 @@ import 'base_themes.dart';
 const primaryDark = Color(0xFF1B1F2B);
 const secondaryDark = Color(0xFFcd395d);
 
-const redDark = Color(0xffdb2b2b);
-const greenDark = Color(0xff04cd03);
+const redDark = Color(0xffef5f5d);
+const greenDark = Color(0xff47c27a);
 
 class DarkTheme with BaseTheme {
   ThemeData generateTheme() {

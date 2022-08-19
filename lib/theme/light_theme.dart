@@ -5,8 +5,8 @@ import 'base_themes.dart';
 const primaryLight = Color(0xFFF5F5F5);
 const secondaryLight = Color(0xFFFB6487);
 
-const redLight = Color(0xffef3f3f);
-const greenLight = Color(0xff07ee05);
+const redLight = Color(0xffeb5757);
+const greenLight = Color(0xff6fcf97);
 
 class LightTheme with BaseTheme {
   ThemeData generateTheme() {

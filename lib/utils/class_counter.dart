@@ -1,3 +1,4 @@
+import 'package:nsutx/constants.dart';
 import 'package:nsutx/models/course.dart';
 
 Map<String, double> classStats(Course course) {
@@ -22,3 +23,15 @@ Map<String, double> classStats(Course course) {
     'absent': totalAbsent,
   };
 }
+
+int toSafe(double present, double total) {
+  double extraClasses = (MIN_ATTENDANCE_PERCENTAGE * total - present) /
+      (1 - MIN_ATTENDANCE_PERCENTAGE);
+
+  return extraClasses.ceil();
+}
+
+// m = (a + x) / (b + x)
+// mb + mx = a + x
+// mb - a = x*(1 - m)
+// x = (mb - a) / (1 - m)

@@ -3,6 +3,8 @@ import 'package:nsutx/models/name_icon.dart';
 
 Uri IMS_LOGIN_URL = Uri.parse('https://imsnsit.org/imsnsit/');
 
+const MIN_ATTENDANCE_PERCENTAGE = 0.75;
+
 List<NameIcon> actions = [
   NameIcon(
     name: 'Profile',

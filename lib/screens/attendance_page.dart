@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nsutx/Controllers/attendance_controller.dart';
+import 'package:nsutx/widgets/attendance_card.dart';
 
 class AttendancePage extends StatelessWidget {
   AttendancePage({Key? key}) : super(key: key);
@@ -26,10 +27,19 @@ class AttendancePage extends StatelessWidget {
           ],
         ),
       ),
-      body: Center(
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
         child: Obx(
-          () => Text(
-            _attendanceController.courses.length.toString(),
+          () => ListView.separated(
+            itemBuilder: (context, index) {
+              return AttendanceCard(
+                course: _attendanceController.courses.elementAt(index),
+              );
+            },
+            separatorBuilder: (context, index) {
+              return const SizedBox(height: 20);
+            },
+            itemCount: _attendanceController.courses.length,
           ),
         ),
       ),
