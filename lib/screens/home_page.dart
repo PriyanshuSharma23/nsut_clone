@@ -1,5 +1,6 @@
 import 'package:bottom_bar_page_transition/bottom_bar_page_transition.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:nsutx/constants.dart';
 import 'package:nsutx/screens/attendance_page.dart';
 import 'package:nsutx/screens/main_home_screen.dart';
@@ -18,6 +19,8 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    print(Get.theme.bottomNavigationBarTheme.backgroundColor);
+
     return SafeArea(
       child: Scaffold(
         body: BottomBarPageTransition(

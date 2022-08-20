@@ -1,0 +1,92 @@
+{
+    "Monday": {
+        "Classes": [
+            {
+                "Course Name": "Design and Analysis of Algorithms",
+                "Course Code": "CEECSO6",
+                "Professor": "Dr. S. Rao",
+                "From": "08:00 AM",
+                "To": "10:00 AM"
+            },
+            {
+                "Course Code": "CEECSO7",
+                "Course Name": "Computer Architecture & Organization",
+                "Professor": "Dr. D.K. Raheja",
+                "From": "11:00 AM",
+                "To": "01:00 PM"
+            }
+        ]
+    },
+    "Tuesday": {
+        "Classes": [
+            {
+                "Course Code": "CEECSO8",
+                "Course Name": "Web Technology",
+                "Professor": "Dr. Sameer Raman",
+                "From": "08:00 AM",
+                "To": "10:00 AM"
+            },
+            {
+                "Course Code": "CEECSO7",
+                "Course Name": "Computer Architecture & Organization",
+                "Professor": "Dr. D.K. Raheja",
+                "From": "11:00 AM",
+                "To": "01:00 PM"
+            }
+        ]
+    },
+    "Wednesday": {
+        "Classes": [
+            {
+                "Course Name": "Design and Analysis of Algorithms",
+                "Course Code": "CEECSO6",
+                "Professor": "Dr. S. Rao",
+                "From": "08:00 AM",
+                "To": "10:00 AM"
+            },
+            {
+                "Course Code": "CEECSO7",
+                "Course Name": "Computer Architecture & Organization",
+                "Professor": "Dr. D.K. Raheja",
+                "From": "11:00 AM",
+                "To": "01:00 PM"
+            }
+        ]
+    },
+    "Thursday": {
+        "Classes": [
+            {
+                "Course Name": "Design and Analysis of Algorithms",
+                "Course Code": "CEECSO6",
+                "Professor": "Dr. S. Rao",
+                "From": "08:00 AM",
+                "To": "10:00 AM"
+            },
+            {
+                "Course Code": "CEECSO8",
+                "Course Name": "Web Technology",
+                "Professor": "Dr. Sameer Raman",
+                "From": "11:00 AM",
+                "To": "01:00 PM"
+            }
+        ]
+    },
+    "Friday": {
+        "Classes": [
+            {
+                "Course Name": "Design and Analysis of Algorithms",
+                "Course Code": "CEECSO6",
+                "Professor": "Dr. S. Rao",
+                "From": "08:00 AM",
+                "To": "10:00 AM"
+            },
+            {
+                "Course Code": "CEECSO7",
+                "Course Name": "Computer Architecture & Organization",
+                "Professor": "Dr. D.K. Raheja",
+                "From": "11:00 AM",
+                "To": "01:00 PM"
+            }
+        ]
+    }
+}

@@ -35,6 +35,7 @@ class LightTheme with BaseTheme {
         backgroundColor: primaryLight,
       ),
       bottomNavigationBarTheme: theme.bottomNavigationBarTheme.copyWith(
+        type: BottomNavigationBarType.fixed,
         backgroundColor: primaryLight,
         elevation: 2,
         selectedItemColor: secondaryLight,

@@ -7,8 +7,6 @@ import 'package:nsutx/bindings/initial_bindings.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  // ThemeController themeController = Get.put(ThemeController());
   InitialBindings().dependencies();
 
   runApp(Obx(

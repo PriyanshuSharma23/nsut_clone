@@ -34,6 +34,8 @@ class DarkTheme with BaseTheme {
           ),
         ),
         bottomNavigationBarTheme: theme.bottomNavigationBarTheme.copyWith(
+          showUnselectedLabels: false,
+          type: BottomNavigationBarType.fixed,
           backgroundColor: primaryDark,
           elevation: 2,
           selectedItemColor: secondaryDark,
