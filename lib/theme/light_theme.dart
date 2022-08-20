@@ -38,6 +38,13 @@ class LightTheme with BaseTheme {
         backgroundColor: primaryLight,
         elevation: 2,
         selectedItemColor: secondaryLight,
+        unselectedIconTheme: const IconThemeData(
+          color: Colors.black,
+          size: 20,
+        ),
+        selectedIconTheme: const IconThemeData(
+          size: 24,
+        ),
       ),
     );
   }

@@ -37,6 +37,13 @@ class DarkTheme with BaseTheme {
           backgroundColor: primaryDark,
           elevation: 2,
           selectedItemColor: secondaryDark,
+          unselectedIconTheme: const IconThemeData(
+            color: Colors.white,
+            size: 20,
+          ),
+          selectedIconTheme: const IconThemeData(
+            size: 24,
+          ),
         ));
   }
 }

@@ -57,3 +57,31 @@ List<NameIcon> actions = [
     to: '/events',
   ),
 ];
+
+List<NameIcon> bottomActions = [
+  NameIcon(
+    name: 'Time Table',
+    icon: Icons.watch_later_outlined,
+    to: '/time_table',
+  ),
+  NameIcon(
+    name: 'Attendance',
+    icon: Icons.person_search_rounded,
+    to: '/attendance',
+  ),
+  NameIcon(
+    name: 'Home',
+    icon: Icons.home,
+    to: '/',
+  ),
+  NameIcon(
+    name: 'Todo',
+    icon: Icons.checklist,
+    to: '/todo',
+  ),
+  NameIcon(
+    name: 'Events',
+    icon: Icons.event_note_rounded,
+    to: '/events',
+  ),
+];
