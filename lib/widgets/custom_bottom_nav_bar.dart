@@ -167,6 +167,7 @@ class _ItemWidgetState extends State<_ItemWidget> {
           width: widget.isSelected ? 130 : 50,
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               IconTheme(
                 data: IconThemeData(

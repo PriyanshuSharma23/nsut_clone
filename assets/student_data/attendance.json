@@ -17,8 +17,8 @@
                     "Date": "02/01/2022",
                     "Classes": [
                         {
-                            "Marked": "ABSENT",
-                            "Attendance_Given": false
+                            "Marked": "PRESENT",
+                            "Attendance_Given": true
                         },
                         {
                             "Marked": "PRESENT",
@@ -125,8 +125,8 @@
                     "Date": "02/01/2022",
                     "Classes": [
                         {
-                            "Marked": "ABSENT",
-                            "Attendance_Given": false
+                            "Marked": "PRESENT",
+                            "Attendance_Given": true
                         },
                         {
                             "Marked": "PRESENT",
@@ -391,8 +391,8 @@
                     "Date": "02/01/2022",
                     "Classes": [
                         {
-                            "Marked": "ABSENT",
-                            "Attendance_Given": false
+                            "Marked": "PRESENT",
+                            "Attendance_Given": true
                         },
                         {
                             "Marked": "PRESENT",
@@ -431,8 +431,8 @@
                     "Date": "06/01/2022",
                     "Classes": [
                         {
-                            "Marked": "ABSENT",
-                            "Attendance_Given": false
+                            "Marked": "PRESENT",
+                            "Attendance_Given": true
                         }
                     ]
                 },

@@ -68,6 +68,12 @@ class _HomePageState extends State<HomePage> {
                 _pageController.animateToPage(index,
                     duration: const Duration(milliseconds: 300),
                     curve: Curves.ease);
+                // EasyDebounce.debounce(
+                //     'change debounce', const Duration(milliseconds: 200), () {
+                //   _pageController.animateToPage(index,
+                //       duration: const Duration(milliseconds: 300),
+                //       curve: Curves.ease);
+                // });
               });
             },
             items: bottomActions
@@ -90,4 +96,24 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
+  Widget getBody(int i) {
+    switch (i) {
+      case 1:
+        return AttendancePage();
+      case 3:
+        return AttendancePage();
+      default:
+        return MainHomeScreen();
+    }
+  }
 }
+
+
+// BottomBarPageTransition(
+//           builder: (context, index) => getBody(index),
+//           currentIndex: _selectedIndex,
+//           totalLength: 5,
+//           transitionType: TransitionType.fade,
+          
+//         ),

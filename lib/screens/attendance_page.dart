@@ -32,8 +32,15 @@ class AttendancePage extends StatelessWidget {
         child: Obx(
           () => ListView.separated(
             itemBuilder: (context, index) {
-              return AttendanceCard(
-                course: _attendanceController.courses.elementAt(index),
+              return GestureDetector(
+                onTap: () {
+                  Get.toNamed('daily_attendance', arguments: [
+                    _attendanceController.courses.elementAt(index)
+                  ]);
+                },
+                child: AttendanceCard(
+                  course: _attendanceController.courses.elementAt(index),
+                ),
               );
             },
             separatorBuilder: (context, index) {
