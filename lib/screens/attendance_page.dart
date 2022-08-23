@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nsutx/Controllers/attendance_controller.dart';
 import 'package:nsutx/widgets/attendance_card.dart';
+import 'package:nsutx/widgets/elevated_container.dart';
 
 class AttendancePage extends StatelessWidget {
   AttendancePage({Key? key}) : super(key: key);
@@ -27,8 +28,7 @@ class AttendancePage extends StatelessWidget {
           ],
         ),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(10.0),
+      body: ElevatedContainer(
         child: Obx(
           () => ListView.separated(
             itemBuilder: (context, index) {

@@ -4,6 +4,9 @@ import 'package:nsutx/Controllers/theme_controller.dart';
 import 'package:nsutx/constants.dart';
 import 'package:nsutx/screens/attendance_page.dart';
 import 'package:nsutx/screens/main_home_screen.dart';
+import 'package:nsutx/screens/notices_screen.dart';
+import 'package:nsutx/screens/time_table_screen.dart';
+import 'package:nsutx/screens/todo_screen.dart';
 import 'package:nsutx/theme/dark_theme.dart';
 import 'package:nsutx/theme/light_theme.dart';
 import 'package:nsutx/widgets/custom_bottom_nav_bar.dart';
@@ -47,11 +50,11 @@ class _HomePageState extends State<HomePage> {
           },
           controller: _pageController,
           children: [
-            MainHomeScreen(),
+            TimeTableScreen(),
             AttendancePage(),
             MainHomeScreen(),
-            AttendancePage(),
-            MainHomeScreen()
+            const TodoScreen(),
+            const NoticesScreen()
           ],
         ),
         bottomNavigationBar: Obx(

@@ -128,35 +128,8 @@ class _ItemWidget extends StatefulWidget {
 }
 
 class _ItemWidgetState extends State<_ItemWidget> {
-  final GlobalKey<AnimatedListState> _key = GlobalKey<AnimatedListState>();
-
   @override
   Widget build(BuildContext context) {
-    final items = <Widget>[
-      IconTheme(
-        data: IconThemeData(
-          size: widget.iconSize,
-          color: widget.isSelected
-              ? widget.item.activeColor.withOpacity(1)
-              : widget.item.inactiveColor ?? widget.item.activeColor,
-        ),
-        child: widget.item.icon,
-      ),
-      Expanded(
-        child: Container(
-          padding: const EdgeInsets.symmetric(horizontal: 4),
-          child: DefaultTextStyle.merge(
-            style: TextStyle(
-              color: widget.item.activeColor,
-              fontWeight: FontWeight.bold,
-            ),
-            maxLines: 1,
-            textAlign: widget.item.textAlign,
-            child: widget.item.title,
-          ),
-        ),
-      ),
-    ];
     return Semantics(
       container: true,
       selected: widget.isSelected,
@@ -229,3 +202,31 @@ class BottomNavyBarItem {
   /// This will take effect only if [title] it a [Text] widget.
   final TextAlign? textAlign;
 }
+
+
+// final items = <Widget>[
+//       IconTheme(
+//         data: IconThemeData(
+//           size: widget.iconSize,
+//           color: widget.isSelected
+//               ? widget.item.activeColor.withOpacity(1)
+//               : widget.item.inactiveColor ?? widget.item.activeColor,
+//         ),
+//         child: widget.item.icon,
+//       ),
+//       Expanded(
+//         child: Container(
+//           padding: const EdgeInsets.symmetric(horizontal: 4),
+//           child: DefaultTextStyle.merge(
+//             style: TextStyle(
+//               color: widget.item.activeColor,
+//               fontWeight: FontWeight.bold,
+//             ),
+//             maxLines: 1,
+//             textAlign: widget.item.textAlign,
+//             child: widget.item.title,
+//           ),
+//         ),
+//       ),
+//     ];
+    

@@ -30,7 +30,12 @@ class DailyAttendanceScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Column(children: wordsList.map((word) => Text(word)).toList()),
+        title: Column(
+            children: wordsList
+                .map((word) => Text(word,
+                    style: Get.theme.textTheme.titleLarge
+                        ?.copyWith(fontWeight: FontWeight.bold)))
+                .toList()),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
