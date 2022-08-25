@@ -12,6 +12,7 @@ class LightTheme with BaseTheme {
   ThemeData generateTheme() {
     final theme = ThemeData.light();
     return theme.copyWith(
+      splashColor: secondaryLight,
       primaryColor: primaryLight,
       scaffoldBackgroundColor: primaryLight,
       textTheme: font().apply(

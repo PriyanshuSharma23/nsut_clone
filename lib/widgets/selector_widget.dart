@@ -75,7 +75,7 @@ class SelectorItem extends StatelessWidget {
               color: isDark
                   ? Colors.black.withOpacity(0.6)
                   : Colors.grey.withOpacity(0.3),
-              offset: const Offset(2, 2),
+              // offset: const Offset(2, 2),
               blurRadius: 15,
               spreadRadius: 3,
             ),

@@ -26,7 +26,7 @@ final drawerActions = [
   NameIcon(
     name: 'Time Table',
     icon: Icons.watch_later_outlined,
-    to: '/time_table',
+    to: '/timetable',
   ),
   NameIcon(
     name: 'Notices',
@@ -89,7 +89,7 @@ List<NameIcon> actions = [
   NameIcon(
     name: 'Time Table',
     icon: Icons.watch_later_outlined,
-    to: '/time_table',
+    to: '/timetable',
   ),
   NameIcon(
     name: 'Syllabus',
@@ -127,7 +127,7 @@ List<NameIcon> bottomActions = [
   NameIcon(
     name: 'Time Table',
     icon: Icons.watch_later_outlined,
-    to: '/time_table',
+    to: '/timetable',
   ),
   NameIcon(
     name: 'Attendance',
