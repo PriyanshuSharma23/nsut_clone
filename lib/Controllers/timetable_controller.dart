@@ -6,7 +6,23 @@ import 'package:get/get.dart';
 import 'package:nsutx/models/timetable_model.dart';
 
 class TimetableController extends GetxController {
-  final _timetable = TimetableModel().obs;
+  final _timetable = TimetableModel(
+    monday: Weekday(
+      classes: [],
+    ),
+    tuesday: Weekday(
+      classes: [],
+    ),
+    wednesday: Weekday(
+      classes: [],
+    ),
+    thursday: Weekday(
+      classes: [],
+    ),
+    friday: Weekday(
+      classes: [],
+    ),
+  ).obs;
 
   get timetable => _timetable.value;
 

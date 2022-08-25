@@ -7,12 +7,14 @@ class Selector extends StatefulWidget {
   final int itemsLength;
   final Function onItemSelected;
   final List<Widget> items;
+  final int selectedIndex;
 
   const Selector({
     Key? key,
     required this.itemsLength,
     required this.onItemSelected,
     required this.items,
+    this.selectedIndex = 0,
     // required this.selectedIndex,
   }) : super(key: key);
 
@@ -21,7 +23,7 @@ class Selector extends StatefulWidget {
 }
 
 class _SelectorState extends State<Selector> {
-  int _selectedIndex = 0;
+  // int _selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -31,13 +33,10 @@ class _SelectorState extends State<Selector> {
         for (int i = 0; i < widget.itemsLength; i++)
           GestureDetector(
             onTap: () {
-              // widget.onItemSelected(i);
-              setState(() {
-                _selectedIndex = i;
-              });
+              widget.onItemSelected(i);
             },
             child: SelectorItem(
-              isSelected: i == _selectedIndex,
+              isSelected: i == widget.selectedIndex,
               child: widget.items.elementAt(i),
             ),
           ),

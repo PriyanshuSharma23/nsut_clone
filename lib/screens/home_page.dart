@@ -50,7 +50,7 @@ class _HomePageState extends State<HomePage> {
           },
           controller: _pageController,
           children: [
-            TimeTableScreen(),
+            const TimeTableScreen(),
             AttendancePage(),
             MainHomeScreen(),
             const TodoScreen(),

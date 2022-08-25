@@ -35,7 +35,8 @@ class AttendancePage extends StatelessWidget {
               return GestureDetector(
                 onTap: () {
                   Get.toNamed('daily_attendance', arguments: [
-                    _attendanceController.courses.elementAt(index)
+                    _attendanceController.courses.elementAt(
+                        _attendanceController.courses.length - index - 1)
                   ]);
                 },
                 child: AttendanceCard(

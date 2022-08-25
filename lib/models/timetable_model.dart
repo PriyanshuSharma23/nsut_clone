@@ -1,45 +1,50 @@
 class TimetableModel {
-  Weekday? monday;
-  Weekday? tuesday;
-  Weekday? wednesday;
-  Weekday? thursday;
-  Weekday? friday;
+  Weekday monday;
+  Weekday tuesday;
+  Weekday wednesday;
+  Weekday thursday;
+  Weekday friday;
 
-  TimetableModel(
-      {this.monday, this.tuesday, this.wednesday, this.thursday, this.friday});
+  TimetableModel({
+    required this.monday,
+    required this.tuesday,
+    required this.wednesday,
+    required this.thursday,
+    required this.friday,
+  });
 
   TimetableModel.fromJson(Map<String, dynamic> json)
-      : monday =
-            json['Monday'] != null ? Weekday.fromJson(json['Monday']) : null,
-        tuesday =
-            json['Tuesday'] != null ? Weekday.fromJson(json['Tuesday']) : null,
-        wednesday = json['Wednesday'] != null
-            ? Weekday.fromJson(json['Wednesday'])
-            : null,
-        thursday = json['Thursday'] != null
-            ? Weekday.fromJson(json['Thursday'])
-            : null,
-        friday =
-            json['Friday'] != null ? Weekday.fromJson(json['Friday']) : null;
+      : monday = Weekday.fromJson(json['Monday']),
+        tuesday = Weekday.fromJson(json['Tuesday']),
+        wednesday = Weekday.fromJson(json['Wednesday']),
+        thursday = Weekday.fromJson(json['Thursday']),
+        friday = Weekday.fromJson(json['Friday']);
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    if (monday != null) {
-      data['Monday'] = monday?.toJson();
-    }
-    if (tuesday != null) {
-      data['Tuesday'] = tuesday?.toJson();
-    }
-    if (wednesday != null) {
-      data['Wednesday'] = wednesday?.toJson();
-    }
-    if (thursday != null) {
-      data['Thursday'] = thursday?.toJson();
-    }
-    if (friday != null) {
-      data['Friday'] = friday?.toJson();
-    }
+    data['Monday'] = monday.toJson();
+    data['Tuesday'] = tuesday.toJson();
+    data['Wednesday'] = wednesday.toJson();
+    data['Thursday'] = thursday.toJson();
+    data['Friday'] = friday.toJson();
     return data;
+  }
+
+  Weekday getWeekday(int index) {
+    switch (index) {
+      case 0:
+        return monday;
+      case 1:
+        return tuesday;
+      case 2:
+        return wednesday;
+      case 3:
+        return thursday;
+      case 4:
+        return friday;
+      default:
+        return monday;
+    }
   }
 }
 

@@ -39,4 +39,10 @@ class Day {
 
     return '$date-$month-$year';
   }
+
+  static todaysDayIndex() {
+    var now = DateTime.now();
+    var day = now.weekday - 1;
+    return day;
+  }
 }

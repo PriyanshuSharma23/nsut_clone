@@ -4,6 +4,7 @@ import 'package:nsutx/models/course.dart';
 import 'package:nsutx/theme/dark_theme.dart';
 import 'package:nsutx/theme/light_theme.dart';
 import 'package:nsutx/utils/words_util.dart';
+import 'package:nsutx/widgets/elevated_container.dart';
 import 'package:nsutx/widgets/vertical_band_card.dart';
 
 class DailyAttendanceScreen extends StatelessWidget {
@@ -37,8 +38,7 @@ class DailyAttendanceScreen extends StatelessWidget {
                         ?.copyWith(fontWeight: FontWeight.bold)))
                 .toList()),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
+      body: ElevatedContainer(
         child: ListView.separated(
           itemBuilder: (context, index) {
             return BandCard(
