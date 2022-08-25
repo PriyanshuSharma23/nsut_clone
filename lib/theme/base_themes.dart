@@ -21,6 +21,7 @@ mixin BaseTheme {
       color: Colors.transparent,
       elevation: 0,
       shadowColor: Colors.transparent,
+      centerTitle: true,
     );
   }
 }

@@ -15,6 +15,7 @@ class DarkTheme with BaseTheme {
     return theme.copyWith(
         primaryColor: primaryDark,
         splashColor: secondaryDark,
+        colorScheme: theme.colorScheme.copyWith(secondary: secondaryDark),
         scaffoldBackgroundColor: primaryDark,
         textTheme: font().apply(
           displayColor: Colors.white,

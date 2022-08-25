@@ -106,46 +106,56 @@ class MainHomeScreen extends StatelessWidget {
                               constraints: BoxConstraints(
                                 maxWidth: screenWidth / 3,
                               ),
-                              child: Column(
-                                children: [
-                                  CircularPercentIndicator(
-                                    startAngle: 200,
-                                    radius: 40,
-                                    lineWidth: 5,
-                                    percent: percentage,
-                                    center: Text(
-                                      '${(percentage * 100).toStringAsFixed(2)}%',
-                                      style: Get.theme.textTheme.bodyLarge!
-                                          .copyWith(
-                                        fontWeight: FontWeight.bold,
-                                        color: isDark
-                                            ? Colors.white
-                                            : Colors.black,
-                                      ),
-                                    ),
-                                    progressColor:
-                                        percentage >= MIN_ATTENDANCE_PERCENTAGE
-                                            ? green
-                                            : red,
-                                    backgroundColor: Colors.transparent,
-                                  ),
-                                  Text(
-                                    course.courseCode,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyText1!
-                                        .copyWith(
+                              margin: const EdgeInsets.symmetric(horizontal: 8),
+                              child: GestureDetector(
+                                onTap: () {
+                                  Get.toNamed(
+                                    '/daily_attendance',
+                                    arguments: [course],
+                                  );
+                                },
+                                child: Column(
+                                  children: [
+                                    CircularPercentIndicator(
+                                      startAngle: 200,
+                                      radius: 40,
+                                      lineWidth: 5,
+                                      percent: percentage,
+                                      center: Text(
+                                        '${(percentage * 100).toStringAsFixed(2)}%',
+                                        style: Get.theme.textTheme.bodyLarge!
+                                            .copyWith(
                                           fontWeight: FontWeight.bold,
+                                          color: isDark
+                                              ? Colors.white
+                                              : Colors.black,
                                         ),
-                                  ),
-                                  Text(
-                                    course.courseName,
-                                    style: Theme.of(context).textTheme.caption,
-                                    textAlign: TextAlign.center,
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                ],
+                                      ),
+                                      progressColor: percentage >=
+                                              MIN_ATTENDANCE_PERCENTAGE
+                                          ? green
+                                          : red,
+                                      backgroundColor: Colors.transparent,
+                                    ),
+                                    Text(
+                                      course.courseCode,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyText1!
+                                          .copyWith(
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                    ),
+                                    Text(
+                                      course.courseName,
+                                      style:
+                                          Theme.of(context).textTheme.caption,
+                                      textAlign: TextAlign.center,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ],
+                                ),
                               ),
                             );
                           }).toList(),
