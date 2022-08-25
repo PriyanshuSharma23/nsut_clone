@@ -48,11 +48,11 @@ class DailyAttendanceScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      course.attendance.elementAt(index).date,
+                      course.attendance.reversed.elementAt(index).date,
                       style: Get.theme.textTheme.headline6,
                     ),
                     Row(
-                      children: course.attendance
+                      children: course.attendance.reversed
                           .elementAt(index)
                           .classes
                           .map((attendance) =>
