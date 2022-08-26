@@ -88,77 +88,80 @@ class MainHomeScreen extends StatelessWidget {
                             spreadRadius: 5,
                           ),
                         ]),
-                    padding: const EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.symmetric(vertical: 32.0),
                     child: SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Obx(
                         () => Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: _attendanceController.courses.map((course) {
-                            final tally = classStats(course);
-                            final percentage =
-                                tally['present']! / tally['total']!;
+                          children: _attendanceController.courses.map(
+                            (course) {
+                              final tally = classStats(course);
+                              final percentage =
+                                  tally['present']! / tally['total']!;
 
-                            final red = isDark ? redDark : redLight;
-                            final green = isDark ? greenDark : greenLight;
-                            return Container(
-                              constraints: BoxConstraints(
-                                maxWidth: screenWidth / 3,
-                              ),
-                              margin: const EdgeInsets.symmetric(horizontal: 8),
-                              child: GestureDetector(
-                                onTap: () {
-                                  Get.toNamed(
-                                    '/daily_attendance',
-                                    arguments: [course],
-                                  );
-                                },
-                                child: Column(
-                                  children: [
-                                    CircularPercentIndicator(
-                                      startAngle: 200,
-                                      radius: 40,
-                                      lineWidth: 5,
-                                      percent: percentage,
-                                      center: Text(
-                                        '${(percentage * 100).toStringAsFixed(2)}%',
-                                        style: Get.theme.textTheme.bodyLarge!
-                                            .copyWith(
-                                          fontWeight: FontWeight.bold,
-                                          color: isDark
-                                              ? Colors.white
-                                              : Colors.black,
-                                        ),
-                                      ),
-                                      progressColor: percentage >=
-                                              MIN_ATTENDANCE_PERCENTAGE
-                                          ? green
-                                          : red,
-                                      backgroundColor: Colors.transparent,
-                                    ),
-                                    Text(
-                                      course.courseCode,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .bodyText1!
-                                          .copyWith(
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                    ),
-                                    Text(
-                                      course.courseName,
-                                      style:
-                                          Theme.of(context).textTheme.caption,
-                                      textAlign: TextAlign.center,
-                                      maxLines: 2,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ],
+                              final red = isDark ? redDark : redLight;
+                              final green = isDark ? greenDark : greenLight;
+                              return Container(
+                                constraints: BoxConstraints(
+                                  maxWidth: screenWidth / 3,
                                 ),
-                              ),
-                            );
-                          }).toList(),
+                                margin:
+                                    const EdgeInsets.symmetric(horizontal: 8),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Get.toNamed(
+                                      '/daily_attendance',
+                                      arguments: [course],
+                                    );
+                                  },
+                                  child: Column(
+                                    children: [
+                                      CircularPercentIndicator(
+                                        startAngle: 200,
+                                        radius: 40,
+                                        lineWidth: 5,
+                                        percent: percentage,
+                                        center: Text(
+                                          '${(percentage * 100).toStringAsFixed(2)}%',
+                                          style: Get.theme.textTheme.bodyLarge!
+                                              .copyWith(
+                                            fontWeight: FontWeight.bold,
+                                            color: isDark
+                                                ? Colors.white
+                                                : Colors.black,
+                                          ),
+                                        ),
+                                        progressColor: percentage >=
+                                                MIN_ATTENDANCE_PERCENTAGE
+                                            ? green
+                                            : red,
+                                        backgroundColor: Colors.transparent,
+                                      ),
+                                      Text(
+                                        course.courseCode,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .bodyText1!
+                                            .copyWith(
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                      ),
+                                      Text(
+                                        course.courseName,
+                                        style:
+                                            Theme.of(context).textTheme.caption,
+                                        textAlign: TextAlign.center,
+                                        maxLines: 2,
+                                        overflow: TextOverflow.ellipsis,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                          ).toList(),
                         ),
                       ),
                     ),

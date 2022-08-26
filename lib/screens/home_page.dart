@@ -40,61 +40,59 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final isDark = Get.theme.brightness == Brightness.dark;
-    return SafeArea(
-      child: Scaffold(
-        body: PageView(
-          onPageChanged: (index) {
+    return Scaffold(
+      body: PageView(
+        onPageChanged: (index) {
+          setState(() {
+            _selectedIndex = index;
+          });
+        },
+        controller: _pageController,
+        children: [
+          const TimeTableScreen(),
+          AttendancePage(),
+          MainHomeScreen(),
+          const TodoScreen(),
+          const NoticesScreen()
+        ],
+      ),
+      bottomNavigationBar: Obx(
+        () => BottomNavyBar(
+          backgroundColor: Get.find<ThemeController>().themeData.brightness ==
+                  Brightness.dark
+              ? primaryDark
+              : primaryLight,
+          selectedIndex: _selectedIndex,
+          onItemSelected: (index) {
             setState(() {
               _selectedIndex = index;
+
+              _pageController.animateToPage(index,
+                  duration: const Duration(milliseconds: 300),
+                  curve: Curves.ease);
+              // EasyDebounce.debounce(
+              //     'change debounce', const Duration(milliseconds: 200), () {
+              //   _pageController.animateToPage(index,
+              //       duration: const Duration(milliseconds: 300),
+              //       curve: Curves.ease);
+              // });
             });
           },
-          controller: _pageController,
-          children: [
-            const TimeTableScreen(),
-            AttendancePage(),
-            MainHomeScreen(),
-            const TodoScreen(),
-            const NoticesScreen()
-          ],
-        ),
-        bottomNavigationBar: Obx(
-          () => BottomNavyBar(
-            backgroundColor: Get.find<ThemeController>().themeData.brightness ==
-                    Brightness.dark
-                ? primaryDark
-                : primaryLight,
-            selectedIndex: _selectedIndex,
-            onItemSelected: (index) {
-              setState(() {
-                _selectedIndex = index;
-
-                _pageController.animateToPage(index,
-                    duration: const Duration(milliseconds: 300),
-                    curve: Curves.ease);
-                // EasyDebounce.debounce(
-                //     'change debounce', const Duration(milliseconds: 200), () {
-                //   _pageController.animateToPage(index,
-                //       duration: const Duration(milliseconds: 300),
-                //       curve: Curves.ease);
-                // });
-              });
-            },
-            items: bottomActions
-                .map(
-                  (item) => BottomNavyBarItem(
-                    inactiveColor:
-                        Get.find<ThemeController>().themeData.brightness ==
-                                Brightness.dark
-                            ? Colors.white
-                            : Colors.black,
-                    activeColor: isDark ? secondaryDark : secondaryLight,
-                    textAlign: TextAlign.start,
-                    icon: Icon(item.icon),
-                    title: Text(item.name),
-                  ),
-                )
-                .toList(),
-          ),
+          items: bottomActions
+              .map(
+                (item) => BottomNavyBarItem(
+                  inactiveColor:
+                      Get.find<ThemeController>().themeData.brightness ==
+                              Brightness.dark
+                          ? Colors.white
+                          : Colors.black,
+                  activeColor: isDark ? secondaryDark : secondaryLight,
+                  textAlign: TextAlign.start,
+                  icon: Icon(item.icon),
+                  title: Text(item.name),
+                ),
+              )
+              .toList(),
         ),
       ),
     );

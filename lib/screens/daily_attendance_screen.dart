@@ -64,6 +64,7 @@ class DailyAttendanceScreen extends StatelessWidget {
                   "Attended ${tally['present']!.toInt()} out of ${tally['total']!.toInt()}",
                   style: Get.theme.textTheme.headline5!.copyWith(
                     fontWeight: FontWeight.bold,
+                    color: Colors.white,
                   ),
                   textAlign: TextAlign.center,
                 ),
