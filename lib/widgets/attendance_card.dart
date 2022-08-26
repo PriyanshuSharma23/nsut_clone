@@ -119,6 +119,7 @@ class _AttendanceCardState extends State<AttendanceCard> {
                   CircularPercentIndicator(
                     radius: 45,
                     lineWidth: 5,
+                    circularStrokeCap: CircularStrokeCap.round,
                     percent: percentage,
                     center: Text(
                       '${(percentage * 100).toStringAsFixed(2)}%',

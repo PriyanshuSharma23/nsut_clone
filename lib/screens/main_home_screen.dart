@@ -119,10 +119,13 @@ class MainHomeScreen extends StatelessWidget {
                                   child: Column(
                                     children: [
                                       CircularPercentIndicator(
-                                        startAngle: 200,
+                                        circularStrokeCap:
+                                            CircularStrokeCap.round,
+                                        startAngle: 220,
                                         radius: 40,
                                         lineWidth: 5,
-                                        percent: percentage,
+                                        percent: percentage *
+                                            (7 / 9), // 7/9 to make it an arc
                                         center: Text(
                                           '${(percentage * 100).toStringAsFixed(2)}%',
                                           style: Get.theme.textTheme.bodyLarge!
