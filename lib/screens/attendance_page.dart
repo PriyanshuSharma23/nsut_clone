@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nsutx/Controllers/attendance_controller.dart';
 import 'package:nsutx/widgets/attendance_card.dart';
+import 'package:nsutx/widgets/custom_button.dart';
 
 class AttendancePage extends StatelessWidget {
   AttendancePage({Key? key}) : super(key: key);
@@ -34,25 +35,48 @@ class AttendancePage extends StatelessWidget {
             topLeft: Radius.circular(10),
             topRight: Radius.circular(10),
           ),
-          child: Obx(
-            () => ListView.separated(
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () {
-                    Get.toNamed('daily_attendance', arguments: [
-                      _attendanceController.courses.elementAt(index)
-                    ]);
-                  },
-                  child: AttendanceCard(
-                    course: _attendanceController.courses.elementAt(index),
+          child: CustomScrollView(
+            slivers: [
+              SliverList(
+                delegate: SliverChildListDelegate([
+                  Center(
+                    child: CustomButton(
+                      onPressed: () {
+                        Get.toNamed('/attendance_calculate');
+                      },
+                      text: 'Attendance Calculator',
+                    ),
                   ),
-                );
-              },
-              separatorBuilder: (context, index) {
-                return const SizedBox(height: 20);
-              },
-              itemCount: _attendanceController.courses.length,
-            ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                ]),
+              ),
+              SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                (BuildContext context, int index) {
+                  return Obx(() => GestureDetector(
+                        onTap: () {
+                          Get.toNamed('daily_attendance', arguments: [
+                            _attendanceController.courses.elementAt(index)
+                          ]);
+                        },
+                        child: Column(
+                          children: [
+                            AttendanceCard(
+                              course: _attendanceController.courses
+                                  .elementAt(index),
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                          ],
+                        ),
+                      ));
+                },
+                childCount: _attendanceController.courses.length,
+              )),
+            ],
           ),
         ),
       ),

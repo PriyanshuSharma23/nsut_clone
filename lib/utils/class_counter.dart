@@ -35,3 +35,10 @@ int toSafe(double present, double total) {
 // mb + mx = a + x
 // mb - a = x*(1 - m)
 // x = (mb - a) / (1 - m)
+
+int remainClassAttend(num total, num present, num finalPercentage) {
+  // ((remainingClasses + tally['total']!) * finalPercentage ~/ 100 - tally['present']!).toInt().toString()
+  final n = ((total) * finalPercentage ~/ 100 - present).toInt();
+
+  return n < 0 ? 0 : n;
+}

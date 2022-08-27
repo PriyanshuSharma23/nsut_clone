@@ -16,6 +16,7 @@ class ElevatedContainer extends StatelessWidget {
     final isDark = Get.theme.brightness == Brightness.dark;
 
     return Container(
+      width: Get.width,
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(

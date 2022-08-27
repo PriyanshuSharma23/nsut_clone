@@ -5,6 +5,8 @@ import 'base_themes.dart';
 const primaryLight = Color(0xFFF5F5F5);
 const secondaryLight = Color(0xFFFB6487);
 
+const buttonLight = Color(0xFFff416b);
+
 const redLight = Color(0xffeb5757);
 const greenLight = Color(0xff6fcf97);
 
@@ -49,6 +51,13 @@ class LightTheme with BaseTheme {
         selectedIconTheme: const IconThemeData(
           size: 24,
         ),
+      ),
+      sliderTheme: theme.sliderTheme.copyWith(
+        activeTrackColor: secondaryLight,
+        inactiveTrackColor: Colors.black54,
+        thumbColor: secondaryLight,
+        overlayColor: secondaryLight.withAlpha(32),
+        valueIndicatorColor: secondaryLight,
       ),
     );
   }

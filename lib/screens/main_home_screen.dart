@@ -131,9 +131,6 @@ class MainHomeScreen extends StatelessWidget {
                                           style: Get.theme.textTheme.bodyLarge!
                                               .copyWith(
                                             fontWeight: FontWeight.bold,
-                                            color: isDark
-                                                ? Colors.white
-                                                : Colors.black,
                                           ),
                                         ),
                                         progressColor: percentage >=

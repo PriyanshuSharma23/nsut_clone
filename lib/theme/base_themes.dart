@@ -24,4 +24,14 @@ mixin BaseTheme {
       centerTitle: true,
     );
   }
+
+  ElevatedButtonThemeData elevatedButtonTheme() {
+    return ElevatedButtonThemeData(
+      style: ElevatedButton.styleFrom(
+        textStyle: font().titleLarge!.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
+      ),
+    );
+  }
 }

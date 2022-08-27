@@ -1,9 +1,11 @@
 import 'package:get/route_manager.dart';
+import 'package:nsutx/screens/attendance_calculate_screen.dart';
 import 'package:nsutx/screens/attendance_page.dart';
 import 'package:nsutx/screens/daily_attendance_screen.dart';
 import 'package:nsutx/screens/home_page.dart';
 import 'package:nsutx/screens/profile_page.dart';
 import 'package:nsutx/screens/time_table_screen.dart';
+import 'package:nsutx/screens/todo_screen.dart';
 
 final appRoutes = [
   GetPage(
@@ -22,5 +24,16 @@ final appRoutes = [
     name: '/daily_attendance',
     page: () => DailyAttendanceScreen(),
   ),
-  GetPage(name: '/timetable', page: () => const TimeTableScreen())
+  GetPage(
+    name: '/timetable',
+    page: () => const TimeTableScreen(),
+  ),
+  GetPage(
+    name: '/todo',
+    page: () => const TodoScreen(),
+  ),
+  GetPage(
+    name: '/attendance_calculate',
+    page: () => AttendanceCalculateScreen(),
+  )
 ];
