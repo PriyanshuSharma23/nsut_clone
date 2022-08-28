@@ -1,0 +1,34 @@
+[
+    {
+        "name": "Bio-Technology",
+        "code": "BT"
+    },
+    {
+        "name": "Civil Engineering",
+        "code": "CE"
+    },
+    {
+        "name": "Computer Engineering",
+        "code": "COE"
+    },
+    {
+        "name": "Computer Science and Engineering(Big Data Analytics)",
+        "code": "CSDA"
+    },
+    {
+        "name": "Electrical Engineering",
+        "code": "EE"
+    },
+    {
+        "name": "Electronics and Communication Engineering",
+        "code": "ECE"
+    },
+    {
+        "name": "Information Technology",
+        "code": "IT"
+    },
+    {
+        "name": "Mechanical Engineering",
+        "code": "ME"
+    }
+]
