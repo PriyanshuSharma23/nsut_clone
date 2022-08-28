@@ -40,6 +40,13 @@ class Day {
     return '$date-$month-$year';
   }
 
+  static dayMonth() {
+    var now = DateTime.now();
+    final int date = now.day;
+    final String month = months[now.month]!;
+    return '$date $month';
+  }
+
   static todaysDayIndex() {
     var now = DateTime.now();
     var day = now.weekday - 1;

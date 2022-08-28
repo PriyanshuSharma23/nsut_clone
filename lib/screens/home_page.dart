@@ -22,13 +22,15 @@ class _HomePageState extends State<HomePage> {
   // Create a key
 
   int _selectedIndex = 2;
-
-  late PageController _pageController;
+  late final PageController _pageController;
 
   @override
   void initState() {
     super.initState();
-    _pageController = PageController(initialPage: 2);
+    _pageController = PageController(
+      initialPage: _selectedIndex,
+      keepPage: true,
+    );
   }
 
   @override
@@ -56,6 +58,12 @@ class _HomePageState extends State<HomePage> {
           const NoticesScreen()
         ],
       ),
+      // body: BottomBarPageTransition(
+      //   builder: (context, index) => getBody(index),
+      //   currentIndex: _selectedIndex,
+      //   totalLength: 5,
+      //   transitionType: TransitionType.slide,
+      // ),
       bottomNavigationBar: Obx(
         () => BottomNavyBar(
           backgroundColor: Get.find<ThemeController>().themeData.brightness ==
@@ -99,22 +107,13 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget getBody(int i) {
-    switch (i) {
-      case 1:
-        return AttendancePage();
-      case 3:
-        return AttendancePage();
-      default:
-        return MainHomeScreen();
-    }
+    final x = [
+      const TimeTableScreen(),
+      AttendancePage(),
+      MainHomeScreen(),
+      const TodoScreen(),
+      const NoticesScreen()
+    ];
+    return x[i];
   }
 }
-
-
-// BottomBarPageTransition(
-//           builder: (context, index) => getBody(index),
-//           currentIndex: _selectedIndex,
-//           totalLength: 5,
-//           transitionType: TransitionType.fade,
-          
-//         ),

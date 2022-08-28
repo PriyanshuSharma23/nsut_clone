@@ -32,6 +32,78 @@ class _AttendanceCalculateScreenState extends State<AttendanceCalculateScreen> {
     super.dispose();
   }
 
+  void handlePress(Map<String, num> tally) {
+    if (formControl.text.isNotEmpty) {
+      final totalClasses = tally['total']! + remainingClasses;
+
+      final int toAttend =
+          formControl.text.isEmpty ? 0 : int.parse(formControl.text);
+      final present = tally['present']! + toAttend;
+      final percentage = (present / totalClasses) * 100;
+
+      if (remainingClasses < toAttend) {
+        Get.dialog(
+          AlertDialog(
+            title: const Text('Error'),
+            content: const Text(
+                'You can\'t enter more than the remaining of classes'),
+            actions: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: const Text(
+                  'OK',
+                  style: TextStyle(
+                    color: Colors.red,
+                  ),
+                ),
+              ),
+            ],
+            backgroundColor: Get.isDarkMode ? primaryDark : primaryLight,
+          ),
+        );
+      } else {
+        Get.dialog(
+          AlertDialog(
+            content: IntrinsicHeight(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Text(
+                    'Final Percentage: ${(percentage).toStringAsFixed(2)}',
+                  ),
+                  if (percentage < 75)
+                    const SizedBox(
+                      height: 8,
+                    ),
+                  if (percentage < 75) const Text('Less than 75% attendance!')
+                ],
+              ),
+            ),
+            backgroundColor: Get.isDarkMode ? primaryDark : primaryLight,
+          ),
+        );
+      }
+    } else {
+      // show snackbar
+      Get.snackbar(
+        'Error',
+        'Please enter a number',
+        snackPosition: SnackPosition.BOTTOM,
+        backgroundColor: Colors.red.shade600,
+        borderRadius: 8,
+        margin: const EdgeInsets.all(8),
+        snackStyle: SnackStyle.FLOATING,
+        duration: const Duration(seconds: 2),
+        icon: const Icon(
+          Icons.error,
+          color: Colors.white,
+        ),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final tally = _selectedCourse != 'none'
@@ -47,285 +119,228 @@ class _AttendanceCalculateScreenState extends State<AttendanceCalculateScreen> {
           ),
         ),
       ),
-      body: ElevatedContainer(
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              DropdownButton<String>(
-                  isExpanded: true,
-                  icon: const Icon(Icons.keyboard_arrow_down),
-                  dropdownColor: Get.isDarkMode ? primaryDark : primaryLight,
-                  value: _selectedCourse,
-                  items: <DropdownMenuItem<String>>[
-                    DropdownMenuItem(
-                      alignment: Alignment.center,
-                      value: 'none',
-                      child: Text(
-                        '--Select your Course--',
-                        style: Get.theme.textTheme.bodyMedium,
-                      ),
-                    ),
-                    for (final course in _attendanceController.courses)
-                      DropdownMenuItem(
-                        value: course.courseCode,
-                        alignment: Alignment.center,
-                        child: Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            course.courseName,
-                            style: Get.theme.textTheme.bodyMedium,
+      body: Column(
+        children: [
+          Expanded(
+            child: ElevatedContainer(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    DropdownButton<String>(
+                        isExpanded: true,
+                        icon: const Icon(Icons.keyboard_arrow_down),
+                        dropdownColor:
+                            Get.isDarkMode ? primaryDark : primaryLight,
+                        value: _selectedCourse,
+                        items: <DropdownMenuItem<String>>[
+                          DropdownMenuItem(
+                            alignment: Alignment.center,
+                            value: 'none',
+                            child: Text(
+                              '--Select your Course--',
+                              style: Get.theme.textTheme.bodyMedium,
+                            ),
                           ),
-                        ),
-                      ),
-                  ],
-                  onChanged: (String? s) {
-                    setState(() {
-                      _selectedCourse = s!;
-                    });
-                  }),
-              const SizedBox(
-                height: 16,
-              ),
-              Column(
-                children: [
-                  Text(
-                    'Total Classes Till Date: ${tally["total"]?.toInt().toString() ?? "0"}',
-                    style: Get.theme.textTheme.titleMedium,
-                  ),
-                  Text(
-                    'Total Classes Attended Till Date: ${tally["present"]?.toInt().toString() ?? "0"}',
-                    style: Get.theme.textTheme.titleMedium,
-                  )
-                ],
-              ),
-              const SizedBox(
-                height: 24,
-              ),
-              Column(
-                children: [
-                  Text(
-                    'Classes Remaining:',
-                    style: Get.theme.textTheme.titleLarge!.copyWith(
-                      fontWeight: FontWeight.bold,
+                          for (final course in _attendanceController.courses)
+                            DropdownMenuItem(
+                              value: course.courseCode,
+                              alignment: Alignment.center,
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  course.courseName,
+                                  style: Get.theme.textTheme.bodyMedium,
+                                ),
+                              ),
+                            ),
+                        ],
+                        onChanged: (String? s) {
+                          setState(() {
+                            _selectedCourse = s!;
+                          });
+                        }),
+                    const SizedBox(
+                      height: 16,
                     ),
-                  ),
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        remainingClasses.toString(),
-                        style: Get.theme.textTheme.titleLarge!.copyWith(
-                            fontWeight: FontWeight.bold,
-                            color: Get.isDarkMode
-                                ? secondaryDark
-                                : secondaryLight),
-                      ),
-                      const SizedBox(
-                        width: 4,
-                      ),
-                      Text(
-                        'More Classes',
-                        style: Get.theme.textTheme.titleLarge!,
-                      ),
-                    ],
-                  )
-                ],
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              Slider(
-                value: remainingClasses.toDouble(),
-                onChanged: (double value) {
-                  setState(() {
-                    remainingClasses = value.toInt();
-                  });
-                },
-                min: 0,
-                max: 100,
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              Column(
-                children: [
-                  Text(
-                    'Final Percentage:',
-                    style: Get.theme.textTheme.titleLarge!.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    '$finalPercentage%',
-                    style: Get.theme.textTheme.headline5!.copyWith(
-                        fontWeight: FontWeight.bold,
-                        color: Get.isDarkMode ? secondaryDark : secondaryLight),
-                  ),
-                ],
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              Slider(
-                value: finalPercentage.toDouble(),
-                onChanged: (double value) {
-                  setState(() {
-                    finalPercentage = value.toInt();
-                  });
-                },
-                min: 0,
-                max: 100,
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  padding: const EdgeInsets.all(8.0),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: Get.isDarkMode ? buttonDark : buttonLight,
-                  ),
-                  child: Text(
-                    'Attend ${remainClassAttend(remainingClasses + tally['total']!, tally['present']!, finalPercentage)} of $remainingClasses to maintain above $finalPercentage% and above',
-                    style: Get.theme.textTheme.titleLarge!.copyWith(
-                      color: Colors.white,
-                      fontWeight: FontWeight.w600,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 16,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  padding: const EdgeInsets.all(8.0),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Get.isDarkMode
-                            ? Colors.black45
-                            : Colors.grey.shade400,
-                        blurRadius: 8,
-                        spreadRadius: 4,
-                      ),
-                    ],
-                    color: Get.isDarkMode ? primaryDark : primaryLight,
-                  ),
-                  child: SizedBox(
-                    width: double.infinity,
-                    child: Column(
+                    Column(
                       children: [
                         Text(
-                          'Classes to Attend: ',
-                          style: Get.theme.textTheme.titleMedium!
-                              .copyWith(fontWeight: FontWeight.bold),
-                          textAlign: TextAlign.center,
+                          'Total Classes Till Date: ${tally["total"]?.toInt().toString() ?? "0"}',
+                          style: Get.theme.textTheme.titleMedium,
                         ),
-                        const SizedBox(
-                          height: 8,
-                        ),
-                        SizedBox(
-                          width: 100,
-                          child: TextField(
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(
-                                RegExp(r'[0-9]'),
-                              ),
-                            ],
-                            controller: formControl,
-                            keyboardType: TextInputType.number,
-                          ),
-                        ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        CustomButton(
-                            onPressed: () async {
-                              final totalClasses =
-                                  tally['total']! + remainingClasses;
-                              final int toAttend = formControl.text.isEmpty
-                                  ? 0
-                                  : int.parse(formControl.text);
-                              final present = tally['present']! + toAttend;
-                              final percentage = (present / totalClasses) * 100;
-
-                              if (remainingClasses < toAttend) {
-                                showDialog(
-                                    context: context,
-                                    builder: (context) {
-                                      return AlertDialog(
-                                        title: const Text('Error'),
-                                        content: const Text(
-                                            'You can\'t enter more than the remaining of classes'),
-                                        actions: [
-                                          TextButton(
-                                            onPressed: () {
-                                              Navigator.of(context).pop();
-                                            },
-                                            child: const Text(
-                                              'OK',
-                                              style:
-                                                  TextStyle(color: Colors.red),
-                                            ),
-                                          ),
-                                        ],
-                                      );
-                                    });
-                              } else {
-                                showDialog(
-                                  context: context,
-                                  builder: (context) {
-                                    return AlertDialog(
-                                      content: IntrinsicHeight(
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                              'Final Percentage: ${(percentage).toStringAsFixed(2)}',
-                                            ),
-                                            if (percentage < 75)
-                                              const SizedBox(
-                                                height: 8,
-                                              ),
-                                            if (percentage < 75)
-                                              const Text(
-                                                  'Less than 75% attendance!')
-                                          ],
-                                        ),
-                                      ),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
-                                          },
-                                          child: const Text(
-                                            'OK',
-                                            style: TextStyle(color: Colors.red),
-                                          ),
-                                        ),
-                                      ],
-                                    );
-                                  },
-                                );
-                              }
-                            },
-                            text: 'Calculate')
+                        Text(
+                          'Total Classes Attended Till Date: ${tally["present"]?.toInt().toString() ?? "0"}',
+                          style: Get.theme.textTheme.titleMedium,
+                        )
                       ],
                     ),
-                  ),
+                    const SizedBox(
+                      height: 24,
+                    ),
+                    Column(
+                      children: [
+                        Text(
+                          'Classes Remaining:',
+                          style: Get.theme.textTheme.titleLarge!.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              remainingClasses.toString(),
+                              style: Get.theme.textTheme.titleLarge!.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  color: Get.isDarkMode
+                                      ? secondaryDark
+                                      : secondaryLight),
+                            ),
+                            const SizedBox(
+                              width: 4,
+                            ),
+                            Text(
+                              'More Classes',
+                              style: Get.theme.textTheme.titleLarge!,
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Slider(
+                      value: remainingClasses.toDouble(),
+                      onChanged: (double value) {
+                        setState(() {
+                          remainingClasses = value.toInt();
+                        });
+                      },
+                      min: 0,
+                      max: 100,
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Column(
+                      children: [
+                        Text(
+                          'Final Percentage:',
+                          style: Get.theme.textTheme.titleLarge!.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        Text(
+                          '$finalPercentage%',
+                          style: Get.theme.textTheme.headline5!.copyWith(
+                              fontWeight: FontWeight.bold,
+                              color: Get.isDarkMode
+                                  ? secondaryDark
+                                  : secondaryLight),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(
+                      height: 8,
+                    ),
+                    Slider(
+                      value: finalPercentage.toDouble(),
+                      onChanged: (double value) {
+                        setState(() {
+                          finalPercentage = value.toInt();
+                        });
+                      },
+                      min: 0,
+                      max: 100,
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        padding: const EdgeInsets.all(8.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: Get.isDarkMode ? buttonDark : buttonLight,
+                        ),
+                        child: Text(
+                          'Attend ${remainClassAttend(remainingClasses + tally['total']!, tally['present']!, finalPercentage)} of $remainingClasses to maintain above $finalPercentage% and above',
+                          style: Get.theme.textTheme.titleLarge!.copyWith(
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      height: 16,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Container(
+                        padding: const EdgeInsets.all(18.0),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Get.isDarkMode
+                                  ? Colors.black45
+                                  : Colors.grey.shade400,
+                              blurRadius: 8,
+                              spreadRadius: 4,
+                            ),
+                          ],
+                          color: Get.isDarkMode ? primaryDark : primaryLight,
+                        ),
+                        child: SizedBox(
+                          width: double.infinity,
+                          child: Column(
+                            children: [
+                              Text(
+                                'Classes to Attend: ',
+                                style: Get.theme.textTheme.titleMedium!
+                                    .copyWith(fontWeight: FontWeight.bold),
+                                textAlign: TextAlign.center,
+                              ),
+                              const SizedBox(
+                                height: 8,
+                              ),
+                              SizedBox(
+                                width: 100,
+                                child: TextField(
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.allow(
+                                      RegExp(r'[0-9]'),
+                                    ),
+                                  ],
+                                  controller: formControl,
+                                  keyboardType: TextInputType.number,
+                                ),
+                              ),
+                              const SizedBox(
+                                height: 16,
+                              ),
+                              CustomButton(
+                                onPressed: () {
+                                  handlePress(tally);
+                                },
+                                text: 'Calculate',
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ],
+            ),
           ),
-        ),
+        ],
       ),
     );
   }
