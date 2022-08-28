@@ -63,11 +63,6 @@ final drawerActions = [
     icon: Icons.event_note_rounded,
     to: '/events',
   ),
-  NameIcon(
-    name: 'About Us',
-    icon: Icons.info_outline_rounded,
-    to: '/about_us',
-  ),
 ];
 
 List<NameIcon> actions = [

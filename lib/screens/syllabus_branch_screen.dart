@@ -16,7 +16,7 @@ class _SyllabusBranchScreenState extends State<SyllabusBranchScreen> {
 
   @override
   void initState() {
-    _loadFuture = Future.delayed(const Duration(seconds: 2));
+    _loadFuture = Future.delayed(const Duration(seconds: 3));
 
     super.initState();
   }
@@ -69,15 +69,28 @@ class _SyllabusBranchScreenState extends State<SyllabusBranchScreen> {
               child: FutureBuilder(
                   future: _loadFuture,
                   builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.done) {
-                      return Lottie.asset(
-                        'assets/not_found_lottie.json',
-                      );
-                    } else {
-                      return Lottie.asset(
+                    // if (snapshot.connectionState == ConnectionState.done) {
+                    //   return Lottie.asset(
+                    //     'assets/not_found_lottie.json',
+                    //   );
+                    // } else {
+                    //   return Lottie.asset(
+                    //     'assets/searching_lottie.json',
+                    //   );
+                    // }
+                    return AnimatedCrossFade(
+                      duration: const Duration(milliseconds: 500),
+                      firstChild: Lottie.asset(
                         'assets/searching_lottie.json',
-                      );
-                    }
+                      ),
+                      secondChild: Lottie.asset(
+                        'assets/not_found_lottie.json',
+                      ),
+                      crossFadeState:
+                          snapshot.connectionState == ConnectionState.done
+                              ? CrossFadeState.showSecond
+                              : CrossFadeState.showFirst,
+                    );
                   }),
             ),
           ),
