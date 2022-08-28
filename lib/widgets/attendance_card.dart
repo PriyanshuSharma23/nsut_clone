@@ -117,6 +117,7 @@ class _AttendanceCardState extends State<AttendanceCard> {
                     ],
                   ),
                   CircularPercentIndicator(
+                    animation: true,
                     radius: 45,
                     lineWidth: 5,
                     circularStrokeCap: CircularStrokeCap.round,

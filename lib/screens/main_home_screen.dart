@@ -76,6 +76,9 @@ class MainHomeScreen extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.all(10.0),
                   child: Container(
+                    constraints: const BoxConstraints(
+                      maxHeight: 200,
+                    ),
                     decoration: BoxDecoration(
                         color: isDark ? primaryDark : primaryLight,
                         borderRadius: BorderRadius.circular(20),
@@ -89,80 +92,74 @@ class MainHomeScreen extends StatelessWidget {
                           ),
                         ]),
                     padding: const EdgeInsets.symmetric(vertical: 32.0),
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Obx(
-                        () => Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: _attendanceController.courses.map(
-                            (course) {
-                              final tally = classStats(course);
-                              final percentage =
-                                  tally['present']! / tally['total']!;
+                    child: Obx(
+                      () => ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: ((context, index) {
+                          final course = _attendanceController.courses[index];
+                          final tally = classStats(course);
+                          final percentage =
+                              tally['present']! / tally['total']!;
 
-                              final red = isDark ? redDark : redLight;
-                              final green = isDark ? greenDark : greenLight;
-                              return Container(
-                                constraints: BoxConstraints(
-                                  maxWidth: screenWidth / 3,
-                                ),
-                                margin:
-                                    const EdgeInsets.symmetric(horizontal: 8),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    Get.toNamed(
-                                      '/daily_attendance',
-                                      arguments: [course],
-                                    );
-                                  },
-                                  child: Column(
-                                    children: [
-                                      CircularPercentIndicator(
-                                        circularStrokeCap:
-                                            CircularStrokeCap.round,
-                                        startAngle: 220,
-                                        radius: 40,
-                                        lineWidth: 5,
-                                        percent: percentage *
-                                            (7 / 9), // 7/9 to make it an arc
-                                        center: Text(
-                                          '${(percentage * 100).toStringAsFixed(2)}%',
-                                          style: Get.theme.textTheme.bodyLarge!
-                                              .copyWith(
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
-                                        progressColor: percentage >=
-                                                MIN_ATTENDANCE_PERCENTAGE
+                          final red = isDark ? redDark : redLight;
+                          final green = isDark ? greenDark : greenLight;
+                          return Container(
+                            constraints: BoxConstraints(
+                              maxWidth: screenWidth / 3,
+                            ),
+                            margin: const EdgeInsets.symmetric(horizontal: 8),
+                            child: GestureDetector(
+                              onTap: () {
+                                Get.toNamed(
+                                  '/daily_attendance',
+                                  arguments: [course],
+                                );
+                              },
+                              child: Column(
+                                children: [
+                                  CircularPercentIndicator(
+                                    animation: true,
+                                    circularStrokeCap: CircularStrokeCap.round,
+                                    startAngle: 220,
+                                    radius: 40,
+                                    lineWidth: 5,
+                                    percent: percentage *
+                                        (7 / 9), // 7/9 to make it an arc
+                                    center: Text(
+                                      '${(percentage * 100).toStringAsFixed(2)}%',
+                                      style: Get.theme.textTheme.bodyLarge!
+                                          .copyWith(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    progressColor:
+                                        percentage >= MIN_ATTENDANCE_PERCENTAGE
                                             ? green
                                             : red,
-                                        backgroundColor: Colors.transparent,
-                                      ),
-                                      Text(
-                                        course.courseCode,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .bodyText1!
-                                            .copyWith(
-                                              fontWeight: FontWeight.bold,
-                                            ),
-                                      ),
-                                      Text(
-                                        course.courseName,
-                                        style:
-                                            Theme.of(context).textTheme.caption,
-                                        textAlign: TextAlign.center,
-                                        maxLines: 2,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                    ],
+                                    backgroundColor: Colors.transparent,
                                   ),
-                                ),
-                              );
-                            },
-                          ).toList(),
-                        ),
+                                  Text(
+                                    course.courseCode,
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyText1!
+                                        .copyWith(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                  ),
+                                  Text(
+                                    course.courseName,
+                                    style: Theme.of(context).textTheme.caption,
+                                    textAlign: TextAlign.center,
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        }),
+                        itemCount: _attendanceController.courses.length,
                       ),
                     ),
                   ),
