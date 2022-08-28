@@ -40,6 +40,7 @@ dependencies:
   bottom_bar_page_transition: ^2.0.0
   timeline_tile: ^2.0.0
   table_calendar: ^3.0.6
+  lottie: ^1.4.2
 
 dev_dependencies:
   flutter_test:
@@ -65,6 +66,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/
+    - assets/file_icons/
     - assets/student_data/
   #   - images/a_dot_ham.jpeg
 

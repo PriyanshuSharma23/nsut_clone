@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lottie/lottie.dart';
 import 'package:nsutx/theme/dark_theme.dart';
 import 'package:nsutx/theme/light_theme.dart';
 import 'package:nsutx/utils/day.dart';
@@ -18,9 +19,9 @@ class _TodoScreenState extends State<TodoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(),
       body: Column(
         children: [
-          const SizedBox(height: 40),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -97,9 +98,39 @@ class _TodoScreenState extends State<TodoScreen> {
             ),
           ),
           Expanded(
-            child: ElevatedContainer(
-              child: Column(),
-            ),
+            child: Stack(children: [
+              ElevatedContainer(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Lottie.asset(
+                      "assets/no_task_lottie.json",
+                    ),
+                    Text(
+                      'No Tasks',
+                      style: Theme.of(context).textTheme.displaySmall!.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
+                    ),
+                  ],
+                ),
+              ),
+              Align(
+                alignment: Alignment.topRight,
+                child: Container(
+                  padding: const EdgeInsets.all(12.0),
+                  margin: const EdgeInsets.all(12.0),
+                  decoration: BoxDecoration(
+                    color: Get.isDarkMode ? buttonDark : buttonLight,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: const Icon(
+                    Icons.filter_list,
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ]),
           ),
         ],
       ),

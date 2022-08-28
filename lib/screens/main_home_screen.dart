@@ -189,10 +189,14 @@ class MainHomeScreen extends StatelessWidget {
               child: Avatar(avatarRadius: avatarRadius),
             ),
             // drawer opener
-            Align(
-              alignment: Alignment.topLeft,
+            Positioned(
+              top: 40,
+              left: 10,
               child: IconButton(
-                icon: const Icon(Icons.menu),
+                icon: const Icon(
+                  Icons.menu,
+                  color: Colors.white,
+                ),
                 onPressed: () {
                   _key.currentState!.openDrawer();
                 },

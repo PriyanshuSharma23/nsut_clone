@@ -30,14 +30,14 @@ class Day {
     return weekdays[day];
   }
 
-  static todaysDate() {
+  static todaysDate({separator = '-'}) {
     var now = DateTime.now();
 
     final int date = now.day;
     final String month = months[now.month]!;
     final int year = now.year;
 
-    return '$date-$month-$year';
+    return '$date$separator$month$separator$year';
   }
 
   static dayMonth() {
@@ -51,5 +51,15 @@ class Day {
     var now = DateTime.now();
     var day = now.weekday - 1;
     return day;
+  }
+
+  static todaysDate2() {
+    var now = DateTime.now();
+
+    final int date = now.day;
+    final String month = months[now.month]!;
+    final int year = now.year;
+
+    return '$date $month $year';
   }
 }

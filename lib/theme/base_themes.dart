@@ -13,6 +13,15 @@ mixin BaseTheme {
       titleSmall: TextStyle(
         fontSize: 14,
       ),
+      displaySmall: TextStyle(
+        fontSize: 24,
+      ),
+      displayMedium: TextStyle(
+        fontSize: 28,
+      ),
+      displayLarge: TextStyle(
+        fontSize: 32,
+      ),
     ));
   }
 
