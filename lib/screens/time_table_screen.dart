@@ -6,6 +6,7 @@ import 'package:nsutx/theme/dark_theme.dart';
 import 'package:nsutx/theme/light_theme.dart';
 import 'package:nsutx/utils/day.dart';
 import 'package:nsutx/widgets/elevated_container.dart';
+import 'package:nsutx/widgets/selector_item.dart';
 import 'package:nsutx/widgets/selector_widget.dart';
 import 'package:nsutx/widgets/time_table_tile.dart';
 import 'package:timeline_tile/timeline_tile.dart';
@@ -16,6 +17,14 @@ class TimeTableScreen extends StatefulWidget {
   @override
   State<TimeTableScreen> createState() => _TimeTableScreenState();
 }
+
+const Days = [
+  'Mon',
+  'Tue',
+  'Wed',
+  'Thu',
+  'Fri',
+];
 
 class _TimeTableScreenState extends State<TimeTableScreen> {
   final _timetable = Get.put(TimetableController());
@@ -49,12 +58,12 @@ class _TimeTableScreenState extends State<TimeTableScreen> {
                     _index = i;
                   });
                 },
-                items: const [
-                  Text('Mon'),
-                  Text('Tue'),
-                  Text('Wed'),
-                  Text('Thu'),
-                  Text('Fri'),
+                items: [
+                  for (int i = 0; i < 5; i++)
+                    SelectorItem(
+                      isSelected: i == _index,
+                      child: Text(Days[i]),
+                    ),
                 ]),
           ),
           Expanded(
