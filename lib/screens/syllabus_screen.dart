@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nsutx/Controllers/branch_controller.dart';
+import 'package:nsutx/theme/dark_theme.dart';
+import 'package:nsutx/theme/light_theme.dart';
 import 'package:nsutx/widgets/elevated_container.dart';
 import 'package:nsutx/widgets/selector_item.dart';
 import 'package:nsutx/widgets/selector_widget.dart';
@@ -98,15 +100,64 @@ class _SyllabusScreenState extends State<SyllabusScreen> {
                       () => SliverList(
                         delegate: SliverChildBuilderDelegate(
                           (context, index) {
-                            return BandCard(
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                    _branchController.branches
-                                        .elementAt(index)
-                                        .name,
-                                    style: Get.theme.textTheme.headline6!),
-                              ),
+                            final currentBranch =
+                                _branchController.branches[index];
+                            return Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    Get.toNamed(
+                                      '/syllabus_branch',
+                                      arguments: [
+                                        currentBranch,
+                                        _selector,
+                                      ],
+                                    );
+                                  },
+                                  child: BandCard(
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text(currentBranch.code,
+                                                  style: Get.theme.textTheme
+                                                      .headline6!
+                                                      .copyWith(
+                                                    fontWeight: FontWeight.bold,
+                                                  )),
+                                              const SizedBox(
+                                                height: 10,
+                                              ),
+                                              SizedBox(
+                                                width: Get.width * 0.6,
+                                                child: Text(currentBranch.name,
+                                                    style: Get.theme.textTheme
+                                                        .labelLarge!),
+                                              ),
+                                            ],
+                                          ),
+                                          Icon(
+                                            Icons.chevron_right,
+                                            color: Get.isDarkMode
+                                                ? secondaryDark
+                                                : secondaryLight,
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  height: 20,
+                                ),
+                              ],
                             );
                           },
                           childCount: _branchController.branches.length,

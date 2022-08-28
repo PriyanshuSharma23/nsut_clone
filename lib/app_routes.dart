@@ -5,6 +5,7 @@ import 'package:nsutx/screens/daily_attendance_screen.dart';
 import 'package:nsutx/screens/home_page.dart';
 import 'package:nsutx/screens/notices_screen.dart';
 import 'package:nsutx/screens/profile_page.dart';
+import 'package:nsutx/screens/syllabus_branch_screen.dart';
 import 'package:nsutx/screens/syllabus_screen.dart';
 import 'package:nsutx/screens/time_table_screen.dart';
 import 'package:nsutx/screens/todo_screen.dart';
@@ -45,5 +46,9 @@ final appRoutes = [
   GetPage(
     name: '/syllabus',
     page: () => const SyllabusScreen(),
+  ),
+  GetPage(
+    name: '/syllabus_branch',
+    page: () => const SyllabusBranchScreen(),
   ),
 ];

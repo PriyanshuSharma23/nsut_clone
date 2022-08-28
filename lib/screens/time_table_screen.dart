@@ -18,7 +18,7 @@ class TimeTableScreen extends StatefulWidget {
   State<TimeTableScreen> createState() => _TimeTableScreenState();
 }
 
-const Days = [
+const days = [
   'Mon',
   'Tue',
   'Wed',
@@ -62,7 +62,7 @@ class _TimeTableScreenState extends State<TimeTableScreen> {
                   for (int i = 0; i < 5; i++)
                     SelectorItem(
                       isSelected: i == _index,
-                      child: Text(Days[i]),
+                      child: Text(days[i]),
                     ),
                 ]),
           ),
