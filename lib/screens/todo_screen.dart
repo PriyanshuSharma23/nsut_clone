@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:lottie/lottie.dart';
+import 'package:nsutx/Controllers/task_controller.dart';
+import 'package:nsutx/models/task_model.dart';
 import 'package:nsutx/theme/dark_theme.dart';
 import 'package:nsutx/theme/light_theme.dart';
 import 'package:nsutx/utils/day.dart';
@@ -16,6 +18,7 @@ class TodoScreen extends StatefulWidget {
 }
 
 class _TodoScreenState extends State<TodoScreen> {
+  final TaskController _taskController = Get.put(TaskController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,7 +43,9 @@ class _TodoScreenState extends State<TodoScreen> {
                 ],
               ),
               CustomButton(
-                onPressed: () {},
+                onPressed: () {
+                  Get.toNamed('add_task');
+                },
                 text: 'Add Task',
                 width: 150,
                 radius: 30,
@@ -118,15 +123,66 @@ class _TodoScreenState extends State<TodoScreen> {
               Align(
                 alignment: Alignment.topRight,
                 child: Container(
-                  padding: const EdgeInsets.all(12.0),
+                  // padding: const EdgeInsets.all(12.0),
                   margin: const EdgeInsets.all(12.0),
                   decoration: BoxDecoration(
                     color: Get.isDarkMode ? buttonDark : buttonLight,
                     borderRadius: BorderRadius.circular(10),
                   ),
-                  child: const Icon(
-                    Icons.filter_list,
-                    color: Colors.white,
+                  child: PopupMenuButton(
+                    icon: const Icon(
+                      Icons.filter_list,
+                      color: Colors.white,
+                    ),
+                    itemBuilder: (context) => [
+                      PopupMenuItem(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'Show: ',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .titleMedium!
+                                  .copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                            ),
+                            const Divider(),
+                          ],
+                        ),
+                      ),
+                      PopupMenuItem(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'All tasks',
+                              style: Theme.of(context).textTheme.titleMedium,
+                            ),
+                          ],
+                        ),
+                      ),
+                      for (final task in taskCategories)
+                        PopupMenuItem(
+                          value: task,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 2.0),
+                                child: Text(
+                                  task,
+                                  style:
+                                      Theme.of(context).textTheme.titleMedium,
+                                  textAlign: TextAlign.start,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                    ],
                   ),
                 ),
               ),

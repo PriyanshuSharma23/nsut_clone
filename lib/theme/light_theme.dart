@@ -59,6 +59,13 @@ class LightTheme with BaseTheme {
         overlayColor: secondaryLight.withAlpha(32),
         valueIndicatorColor: secondaryLight,
       ),
+      popupMenuTheme: theme.popupMenuTheme.copyWith(
+        color: primaryLight,
+        elevation: 10,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
     );
   }
 }

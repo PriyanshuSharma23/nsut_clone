@@ -58,6 +58,13 @@ class DarkTheme with BaseTheme {
         overlayColor: secondaryDark.withAlpha(32),
         valueIndicatorColor: secondaryDark,
       ),
+      popupMenuTheme: theme.popupMenuTheme.copyWith(
+        color: primaryDark,
+        elevation: 10,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
     );
   }
 }

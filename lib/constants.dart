@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:nsutx/models/name_icon.dart';
+import 'package:uuid/uuid.dart';
+import 'package:uuid/uuid_util.dart';
 
 // ignore: non_constant_identifier_names
 Uri IMS_LOGIN_URL = Uri.parse('https://imsnsit.org/imsnsit/');
@@ -145,3 +147,5 @@ List<NameIcon> bottomActions = [
     to: '/notices',
   ),
 ];
+
+var uuid = const Uuid(options: {'grng': UuidUtil.cryptoRNG});

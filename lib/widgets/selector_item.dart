@@ -7,15 +7,15 @@ class SelectorItem extends StatelessWidget {
   final bool isSelected;
   final Widget child;
 
-  final double height;
-  final double width;
+  final double? height;
+  final double? width;
 
   const SelectorItem({
     Key? key,
     required this.isSelected,
     required this.child,
-    this.height = 25,
-    this.width = 50,
+    this.height,
+    this.width,
   }) : super(key: key);
 
   @override

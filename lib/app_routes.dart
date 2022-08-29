@@ -1,4 +1,5 @@
 import 'package:get/route_manager.dart';
+import 'package:nsutx/screens/add_task_screen.dart';
 import 'package:nsutx/screens/attendance_calculate_screen.dart';
 import 'package:nsutx/screens/attendance_page.dart';
 import 'package:nsutx/screens/courses_screen.dart';
@@ -75,5 +76,9 @@ final appRoutes = [
   GetPage(
     name: '/events',
     page: () => const EventsScreen(),
+  ),
+  GetPage(
+    name: '/add_task',
+    page: () => const AddTaskScreen(),
   ),
 ];

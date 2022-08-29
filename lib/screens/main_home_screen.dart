@@ -11,13 +11,20 @@ import 'package:nsutx/widgets/home_drawer.dart';
 import 'package:nsutx/widgets/icon.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
-class MainHomeScreen extends StatelessWidget {
-  MainHomeScreen({
+class MainHomeScreen extends StatefulWidget {
+  const MainHomeScreen({
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<MainHomeScreen> createState() => _MainHomeScreenState();
+}
+
+class _MainHomeScreenState extends State<MainHomeScreen> {
   final double heroSectionHeight = Get.height / 3;
+
   final double avatarRadius = Get.width / 6;
+
   final double screenWidth = Get.width;
 
   final GlobalKey<ScaffoldState> _key = GlobalKey<ScaffoldState>();
@@ -74,96 +81,97 @@ class MainHomeScreen extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Container(
-                    constraints: const BoxConstraints(
-                      maxHeight: 200,
-                    ),
-                    decoration: BoxDecoration(
-                        color: isDark ? primaryDark : primaryLight,
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: [
-                          BoxShadow(
-                            color: isDark
-                                ? Colors.black.withOpacity(0.5)
-                                : Colors.grey.withOpacity(0.3),
-                            blurRadius: 10,
-                            spreadRadius: 5,
-                          ),
-                        ]),
-                    padding: const EdgeInsets.symmetric(vertical: 32.0),
-                    child: Obx(
-                      () => ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemBuilder: ((context, index) {
-                          final course = _attendanceController.courses[index];
-                          final tally = classStats(course);
-                          final percentage =
-                              tally['present']! / tally['total']!;
-
-                          final red = isDark ? redDark : redLight;
-                          final green = isDark ? greenDark : greenLight;
-                          return Container(
-                            constraints: BoxConstraints(
-                              maxWidth: screenWidth / 3,
+                    padding: const EdgeInsets.all(10.0),
+                    child: Container(
+                      constraints: const BoxConstraints(
+                        maxHeight: 200,
+                      ),
+                      decoration: BoxDecoration(
+                          color: isDark ? primaryDark : primaryLight,
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: [
+                            BoxShadow(
+                              color: isDark
+                                  ? Colors.black.withOpacity(0.5)
+                                  : Colors.grey.withOpacity(0.3),
+                              blurRadius: 10,
+                              spreadRadius: 5,
                             ),
-                            margin: const EdgeInsets.symmetric(horizontal: 8),
-                            child: GestureDetector(
-                              onTap: () {
-                                Get.toNamed(
-                                  '/daily_attendance',
-                                  arguments: [course],
-                                );
-                              },
-                              child: Column(
-                                children: [
-                                  CircularPercentIndicator(
-                                    animation: true,
-                                    circularStrokeCap: CircularStrokeCap.round,
-                                    startAngle: 220,
-                                    radius: 40,
-                                    lineWidth: 5,
-                                    percent: percentage *
-                                        (7 / 9), // 7/9 to make it an arc
-                                    center: Text(
-                                      '${(percentage * 100).toStringAsFixed(2)}%',
-                                      style: Get.theme.textTheme.bodyLarge!
-                                          .copyWith(
-                                        fontWeight: FontWeight.bold,
-                                      ),
-                                    ),
-                                    progressColor:
-                                        percentage >= MIN_ATTENDANCE_PERCENTAGE
-                                            ? green
-                                            : red,
-                                    backgroundColor: Colors.transparent,
-                                  ),
-                                  Text(
-                                    course.courseCode,
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .bodyText1!
-                                        .copyWith(
+                          ]),
+                      padding: const EdgeInsets.symmetric(vertical: 32.0),
+                      child: Obx(
+                        () => ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemBuilder: ((context, index) {
+                            final course = _attendanceController.courses[index];
+                            final tally = classStats(course);
+                            final percentage =
+                                tally['present']! / tally['total']!;
+
+                            final red = isDark ? redDark : redLight;
+                            final green = isDark ? greenDark : greenLight;
+                            return Container(
+                              constraints: BoxConstraints(
+                                maxWidth: screenWidth / 3,
+                              ),
+                              margin: const EdgeInsets.symmetric(horizontal: 8),
+                              child: GestureDetector(
+                                onTap: () {
+                                  Get.toNamed(
+                                    '/daily_attendance',
+                                    arguments: [course],
+                                  );
+                                },
+                                child: Column(
+                                  children: [
+                                    CircularPercentIndicator(
+                                      animation: true,
+                                      circularStrokeCap:
+                                          CircularStrokeCap.round,
+                                      startAngle: 220,
+                                      radius: 40,
+                                      lineWidth: 5,
+                                      percent: percentage *
+                                          (7 / 9), // 7/9 to make it an arc
+                                      center: Text(
+                                        '${(percentage * 100).toStringAsFixed(2)}%',
+                                        style: Get.theme.textTheme.bodyLarge!
+                                            .copyWith(
                                           fontWeight: FontWeight.bold,
                                         ),
-                                  ),
-                                  Text(
-                                    course.courseName,
-                                    style: Theme.of(context).textTheme.caption,
-                                    textAlign: TextAlign.center,
-                                    maxLines: 2,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                ],
+                                      ),
+                                      progressColor: percentage >=
+                                              MIN_ATTENDANCE_PERCENTAGE
+                                          ? green
+                                          : red,
+                                      backgroundColor: Colors.transparent,
+                                    ),
+                                    Text(
+                                      course.courseCode,
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .bodyText1!
+                                          .copyWith(
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                    ),
+                                    Text(
+                                      course.courseName,
+                                      style:
+                                          Theme.of(context).textTheme.caption,
+                                      textAlign: TextAlign.center,
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          );
-                        }),
-                        itemCount: _attendanceController.courses.length,
+                            );
+                          }),
+                          itemCount: _attendanceController.courses.length,
+                        ),
                       ),
-                    ),
-                  ),
-                ),
+                    )),
                 Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Wrap(

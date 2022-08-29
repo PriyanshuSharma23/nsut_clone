@@ -61,6 +61,8 @@ class _TimeTableScreenState extends State<TimeTableScreen> {
                 items: [
                   for (int i = 0; i < 5; i++)
                     SelectorItem(
+                      height: 25,
+                      width: 50,
                       isSelected: i == _index,
                       child: Text(days[i]),
                     ),
