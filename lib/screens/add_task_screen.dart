@@ -25,7 +25,8 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
   final coordinatorController = TextEditingController();
   final locationController = TextEditingController(text: 'None');
 
-  DateTime selectedDate = DateTime.now();
+  DateTime selectedDate =
+      DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
   TimeOfDay startTime = TimeOfDay.now();
 
   // start time + 1 hour
@@ -90,6 +91,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
         backgroundColor: Colors.green,
         duration: const Duration(seconds: 2),
       );
+      // print(createTask().printTask());
       Get.find<TaskController>().map.value.addTask(createTask());
     }
   }

@@ -21,6 +21,13 @@ class _TodoScreenState extends State<TodoScreen> {
   final TaskController _taskController = Get.put(TaskController());
   @override
   Widget build(BuildContext context) {
+    // print(_taskController.map.value.getTasks(DateTime(2022, 8, 30)).length);
+    for (final key in _taskController.map.value.tasks.keys) {
+      print('$key:');
+      for (var element in _taskController.map.value.tasks[key]!) {
+        element.printTask();
+      }
+    }
     return Scaffold(
       appBar: AppBar(),
       body: Column(

@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:nsutx/models/task_model.dart';
 
 class TaskStorageModel {
-  final Map<DateTime, List<Task>> _tasks = {};
+  Map<DateTime, List<Task>> tasks = {};
+
+  TaskStorageModel();
 
   List<Task> getTasks(DateTime date) {
-    return _tasks[date] ?? [];
+    return tasks[date] ?? [];
   }
 
   double toDouble(TimeOfDay time) {
@@ -13,29 +15,48 @@ class TaskStorageModel {
   }
 
   void addTask(Task task) {
-    if (!_tasks.containsKey(task.date)) {
-      _tasks[task.date] = [];
-      _tasks[task.date]?.add(task);
+    if (!tasks.containsKey(task.date)) {
+      tasks[task.date] = [];
+      tasks[task.date]?.add(task);
       return;
     }
 
-    for (int i = 0; i < _tasks[task.date]!.length; i++) {
-      if (_tasks[task.date]![i].id == task.id) {
-        _tasks[task.date]![i] = task;
+    for (int i = 0; i < tasks[task.date]!.length; i++) {
+      if (tasks[task.date]![i].id == task.id) {
+        tasks[task.date]![i] = task;
         return;
       }
 
-      if (toDouble(task.startTime) <
-          toDouble(_tasks[task.date]![i].startTime)) {
-        _tasks[task.date]!.insert(i, task);
+      if (toDouble(task.startTime) < toDouble(tasks[task.date]![i].startTime)) {
+        tasks[task.date]!.insert(i, task);
         return;
       }
     }
 
-    _tasks[task.date]!.add(task);
+    tasks[task.date]!.add(task);
+    tasks = tasks;
   }
 
   void removeTask(Task task) {
-    _tasks[task.date]!.removeWhere((t) => t.id == task.id);
+    tasks[task.date]!.removeWhere((t) => t.id == task.id);
+
+    tasks = tasks;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = {};
+    tasks.forEach((key, value) {
+      data[key.toString()] = value.map((e) => e.toJson()).toList();
+    });
+    return data;
+  }
+
+  factory TaskStorageModel.fromJson(Map<String, dynamic> json) {
+    final Map<DateTime, List<Task>> tasks = {};
+    json.forEach((key, value) {
+      tasks[DateTime.parse(key)] =
+          value.map((e) => Task.fromJson(e as Map<String, dynamic>)).toList();
+    });
+    return TaskStorageModel()..tasks = tasks;
   }
 }
