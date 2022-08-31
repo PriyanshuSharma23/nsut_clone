@@ -22,6 +22,8 @@ class _TodoScreenState extends State<TodoScreen> {
   var _selectedDay =
       DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
 
+  TaskCategory? categoryFilter = TaskCategory.all;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -76,6 +78,7 @@ class _TodoScreenState extends State<TodoScreen> {
                 child: ElevatedContainer(
                   child: Tasks(
                     selectedDay: _selectedDay,
+                    filter: categoryFilter,
                   ),
                 ),
               ),
@@ -89,12 +92,19 @@ class _TodoScreenState extends State<TodoScreen> {
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: PopupMenuButton(
+                    initialValue: categoryFilter,
                     icon: const Icon(
                       Icons.filter_list,
                       color: Colors.white,
                     ),
+                    onSelected: (TaskCategory? category) {
+                      setState(() {
+                        categoryFilter = category;
+                      });
+                    },
                     itemBuilder: (context) => [
                       PopupMenuItem(
+                        value: categoryFilter,
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
@@ -111,20 +121,20 @@ class _TodoScreenState extends State<TodoScreen> {
                           ],
                         ),
                       ),
-                      PopupMenuItem(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'All tasks',
-                              style: Get.textTheme.titleMedium,
-                            ),
-                          ],
-                        ),
-                      ),
+                      // PopupMenuItem(
+                      //   child: Column(
+                      //     crossAxisAlignment: CrossAxisAlignment.start,
+                      //     children: [
+                      //       Text(
+                      //         'All tasks',
+                      //         style: Get.textTheme.titleMedium,
+                      //       ),
+                      //     ],
+                      //   ),
+                      // ),
                       for (final task in taskCategories)
                         PopupMenuItem(
-                          value: task,
+                          value: stringToEnumTask(task),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -239,26 +249,29 @@ class CustomCalender extends StatelessWidget {
 }
 
 class Tasks extends StatelessWidget {
-  Tasks({Key? key, required this.selectedDay}) : super(key: key);
+  Tasks({Key? key, required this.selectedDay, this.filter}) : super(key: key);
   final TaskController _taskController = Get.put(TaskController());
   final DateTime selectedDay;
+  final TaskCategory? filter;
 
   @override
   Widget build(BuildContext context) {
-    print(_taskController.getTasks(DateTime(2022, 8, 30)).length);
-    for (final key in _taskController.tasks.keys) {
-      print('$key:');
-      for (var element in _taskController.tasks[key]!) {
-        element.printTask();
-      }
-    }
+    // print(_taskController.getTasks(DateTime(2022, 8, 30)).length);
+    // for (final key in _taskController.tasks.keys) {
+    //   print('$key:');
+    //   for (var element in _taskController.tasks[key]!) {
+    //     element.printTask();
+    //   }
+    // }
 
     return SingleChildScrollView(
       child: Obx(
         () => Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
-            if (_taskController.getTasks(selectedDay).isEmpty)
+            if (_taskController
+                .getTasks(selectedDay, taskCategory: filter)
+                .isEmpty)
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -266,15 +279,20 @@ class Tasks extends StatelessWidget {
                     "assets/no_task_lottie.json",
                   ),
                   Text(
-                    'No Tasks',
+                    _taskController.tasks.isEmpty
+                        ? 'No Tasks'
+                        : 'No task in ${enumToStringTask(filter!)}',
                     style: Theme.of(context).textTheme.displaySmall!.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
                   ),
                 ],
               ),
-            if (_taskController.getTasks(selectedDay).isNotEmpty)
-              for (final task in _taskController.getTasks(selectedDay))
+            if (_taskController
+                .getTasks(selectedDay, taskCategory: filter)
+                .isNotEmpty)
+              for (final task in _taskController.getTasks(selectedDay,
+                  taskCategory: filter))
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 8.0),
                   child: TaskCard(

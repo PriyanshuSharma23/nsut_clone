@@ -17,7 +17,7 @@ class AddTaskScreen extends StatefulWidget {
 }
 
 class _AddTaskScreenState extends State<AddTaskScreen> {
-  String selectedCategory = taskCategories[0];
+  String selectedCategory = taskCategories[1];
 
   // textfield controllers
   final titleController = TextEditingController();
@@ -105,7 +105,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
     // check if argument is a list
     if (Get.arguments is List) {
       if (Get.arguments[0] is Task) {
-        final task = Get.arguments as Task;
+        final task = Get.arguments[0] as Task;
         titleController.text = task.title;
         descriptionController.text = task.description ?? '';
         coordinatorController.text = task.coordinator ?? '';
@@ -175,7 +175,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         children: [
-                          for (final category in taskCategories)
+                          for (final category in taskCategories.sublist(1))
                             Padding(
                               padding: const EdgeInsets.symmetric(
                                 horizontal: 8.0,

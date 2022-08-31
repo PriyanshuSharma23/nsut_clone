@@ -54,7 +54,7 @@ class _HomePageState extends State<HomePage> {
           const TimeTableScreen(),
           AttendancePage(),
           const MainHomeScreen(),
-          TodoScreen(),
+          const TodoScreen(),
           const NoticesScreen()
         ],
       ),
@@ -111,7 +111,7 @@ class _HomePageState extends State<HomePage> {
       const TimeTableScreen(),
       AttendancePage(),
       const MainHomeScreen(),
-      TodoScreen(),
+      const TodoScreen(),
       const NoticesScreen()
     ];
     return x[i];

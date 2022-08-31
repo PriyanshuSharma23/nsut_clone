@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 final taskCategories = [
+  'All Tasks',
   'Test',
   'Meet',
   'Assignment',
@@ -9,6 +10,7 @@ final taskCategories = [
 ];
 
 enum TaskCategory {
+  all,
   test,
   meet,
   assignment,
@@ -18,6 +20,8 @@ enum TaskCategory {
 
 TaskCategory stringToEnumTask(String value) {
   switch (value) {
+    case 'All Tasks':
+      return TaskCategory.all;
     case 'Test':
       return TaskCategory.test;
     case 'Meet':
@@ -35,6 +39,8 @@ TaskCategory stringToEnumTask(String value) {
 
 String enumToStringTask(TaskCategory value) {
   switch (value) {
+    case TaskCategory.all:
+      return 'All Tasks';
     case TaskCategory.test:
       return 'Test';
     case TaskCategory.meet:
@@ -103,7 +109,6 @@ class Task {
       coordinator: json['coordinator'] as String?,
       location: json['location'] as String?,
       date: DateTime.parse(json['date'] as String),
-      //TODO: fix this
       startTime: Date.fromJson(json['startTime'] as Map<String, dynamic>)
           .toTimeOfDay(),
       endTime:
