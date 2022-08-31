@@ -39,7 +39,7 @@ final appRoutes = [
   ),
   GetPage(
     name: '/todo',
-    page: () => const TodoScreen(),
+    page: () => TodoScreen(),
   ),
   GetPage(
     name: '/attendance_calculate',

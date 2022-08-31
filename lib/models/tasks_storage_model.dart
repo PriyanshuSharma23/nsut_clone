@@ -34,13 +34,10 @@ class TaskStorageModel {
     }
 
     tasks[task.date]!.add(task);
-    tasks = tasks;
   }
 
   void removeTask(Task task) {
     tasks[task.date]!.removeWhere((t) => t.id == task.id);
-
-    tasks = tasks;
   }
 
   Map<String, dynamic> toJson() {

@@ -63,3 +63,7 @@ class Day {
     return '$date $month $year';
   }
 }
+
+String dateToString(DateTime date) {
+  return '${date.day}-${date.month}-${date.year}';
+}

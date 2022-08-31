@@ -37,6 +37,9 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
 
   bool notificationsEnabled = true;
 
+  bool inEditMode = false;
+  late String prevId;
+
   // dispose
   @override
   void dispose() {
@@ -69,7 +72,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
       startTime: startTime,
       endTime: endTime,
       notifications: notificationsEnabled,
-      id: uuid.v4(),
+      id: inEditMode ? prevId : uuid.v4(),
     );
   }
 
@@ -92,8 +95,35 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
         duration: const Duration(seconds: 2),
       );
       // print(createTask().printTask());
-      Get.find<TaskController>().map.value.addTask(createTask());
+      Get.find<TaskController>().addTask(createTask());
     }
+  }
+
+  @override
+  void initState() {
+    // check if argument is a task
+    // check if argument is a list
+    if (Get.arguments is List) {
+      if (Get.arguments[0] is Task) {
+        final task = Get.arguments as Task;
+        titleController.text = task.title;
+        descriptionController.text = task.description ?? '';
+        coordinatorController.text = task.coordinator ?? '';
+        locationController.text = task.location ?? '';
+        selectedCategory = enumToStringTask(task.category);
+        selectedDate = task.date;
+        startTime = task.startTime;
+        endTime = task.endTime;
+        notificationsEnabled = task.notifications;
+        inEditMode = true;
+        prevId = task.id;
+      }
+      if (Get.arguments[1] is DateTime) {
+        selectedDate = Get.arguments[1];
+      }
+    }
+
+    super.initState();
   }
 
   @override

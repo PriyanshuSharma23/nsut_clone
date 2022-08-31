@@ -33,6 +33,23 @@ TaskCategory stringToEnumTask(String value) {
   }
 }
 
+String enumToStringTask(TaskCategory value) {
+  switch (value) {
+    case TaskCategory.test:
+      return 'Test';
+    case TaskCategory.meet:
+      return 'Meet';
+    case TaskCategory.assignment:
+      return 'Assignment';
+    case TaskCategory.classTask:
+      return 'Class';
+    case TaskCategory.others:
+      return 'Others';
+    default:
+      return 'Others';
+  }
+}
+
 class Task {
   TaskCategory category;
   String title;

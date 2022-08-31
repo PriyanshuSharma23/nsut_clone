@@ -53,8 +53,8 @@ class _HomePageState extends State<HomePage> {
         children: [
           const TimeTableScreen(),
           AttendancePage(),
-          MainHomeScreen(),
-          const TodoScreen(),
+          const MainHomeScreen(),
+          TodoScreen(),
           const NoticesScreen()
         ],
       ),
@@ -110,8 +110,8 @@ class _HomePageState extends State<HomePage> {
     final x = [
       const TimeTableScreen(),
       AttendancePage(),
-      MainHomeScreen(),
-      const TodoScreen(),
+      const MainHomeScreen(),
+      TodoScreen(),
       const NoticesScreen()
     ];
     return x[i];

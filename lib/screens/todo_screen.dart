@@ -8,6 +8,7 @@ import 'package:nsutx/theme/light_theme.dart';
 import 'package:nsutx/utils/day.dart';
 import 'package:nsutx/widgets/custom_button.dart';
 import 'package:nsutx/widgets/elevated_container.dart';
+import 'package:nsutx/widgets/task_card.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class TodoScreen extends StatefulWidget {
@@ -18,16 +19,11 @@ class TodoScreen extends StatefulWidget {
 }
 
 class _TodoScreenState extends State<TodoScreen> {
-  final TaskController _taskController = Get.put(TaskController());
+  var _selectedDay =
+      DateTime(DateTime.now().year, DateTime.now().month, DateTime.now().day);
+
   @override
   Widget build(BuildContext context) {
-    // print(_taskController.map.value.getTasks(DateTime(2022, 8, 30)).length);
-    for (final key in _taskController.map.value.tasks.keys) {
-      print('$key:');
-      for (var element in _taskController.map.value.tasks[key]!) {
-        element.printTask();
-      }
-    }
     return Scaffold(
       appBar: AppBar(),
       body: Column(
@@ -51,7 +47,7 @@ class _TodoScreenState extends State<TodoScreen> {
               ),
               CustomButton(
                 onPressed: () {
-                  Get.toNamed('add_task');
+                  Get.toNamed('add_task', arguments: [null, _selectedDay]);
                 },
                 text: 'Add Task',
                 width: 150,
@@ -62,69 +58,25 @@ class _TodoScreenState extends State<TodoScreen> {
           const SizedBox(
             height: 20,
           ),
-          TableCalendar(
-            firstDay: DateTime.utc(2010, 10, 16),
-            lastDay: DateTime.utc(2030, 3, 14),
-            focusedDay: DateTime.now(),
-            calendarFormat: CalendarFormat.week,
-            startingDayOfWeek: StartingDayOfWeek.monday,
-            headerStyle: HeaderStyle(
-              leftChevronIcon: Icon(
-                Icons.chevron_left,
-                color: Get.isDarkMode ? secondaryDark : secondaryLight,
-                size: 32,
-              ),
-              rightChevronIcon: Icon(
-                Icons.chevron_right,
-                color: Get.isDarkMode ? secondaryDark : secondaryLight,
-                size: 32,
-              ),
-              titleTextStyle: Theme.of(context).textTheme.titleMedium!.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
-              titleCentered: true,
-              formatButtonVisible: false,
-            ),
-            daysOfWeekStyle: DaysOfWeekStyle(
-              weekdayStyle: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Get.isDarkMode ? secondaryDark : secondaryLight,
-              ),
-              weekendStyle: TextStyle(
-                fontWeight: FontWeight.bold,
-                color: Get.isDarkMode ? secondaryDark : secondaryLight,
-              ),
-            ),
-            calendarStyle: CalendarStyle(
-              defaultTextStyle: Theme.of(context).textTheme.bodyText2!.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
-              weekendTextStyle: Theme.of(context).textTheme.bodyText2!.copyWith(
-                    fontWeight: FontWeight.bold,
-                  ),
-              outsideDaysVisible: false,
-              todayDecoration: BoxDecoration(
-                color: Get.isDarkMode ? secondaryDark : secondaryLight,
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
+          CustomCalender(
+            selectedDay: _selectedDay,
+            updateSelectedDay: (DateTime selectedDay) {
+              setState(() {
+                _selectedDay = selectedDay;
+              });
+            },
           ),
           Expanded(
             child: Stack(children: [
-              ElevatedContainer(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Lottie.asset(
-                      "assets/no_task_lottie.json",
-                    ),
-                    Text(
-                      'No Tasks',
-                      style: Theme.of(context).textTheme.displaySmall!.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
-                    ),
-                  ],
+              Positioned(
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                child: ElevatedContainer(
+                  child: Tasks(
+                    selectedDay: _selectedDay,
+                  ),
                 ),
               ),
               Align(
@@ -165,7 +117,7 @@ class _TodoScreenState extends State<TodoScreen> {
                           children: [
                             Text(
                               'All tasks',
-                              style: Theme.of(context).textTheme.titleMedium,
+                              style: Get.textTheme.titleMedium,
                             ),
                           ],
                         ),
@@ -181,8 +133,7 @@ class _TodoScreenState extends State<TodoScreen> {
                                     const EdgeInsets.symmetric(vertical: 2.0),
                                 child: Text(
                                   task,
-                                  style:
-                                      Theme.of(context).textTheme.titleMedium,
+                                  style: Get.textTheme.titleMedium,
                                   textAlign: TextAlign.start,
                                 ),
                               ),
@@ -196,6 +147,142 @@ class _TodoScreenState extends State<TodoScreen> {
             ]),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class CustomCalender extends StatelessWidget {
+  const CustomCalender({
+    Key? key,
+    required this.selectedDay,
+    required this.updateSelectedDay,
+  }) : super(key: key);
+
+  final DateTime selectedDay;
+  final Function updateSelectedDay;
+
+  @override
+  Widget build(BuildContext context) {
+    return TableCalendar(
+      selectedDayPredicate: (day) {
+        return isSameDay(selectedDay, day);
+      },
+      onDaySelected: (selectedDay, focusedDay) {
+        updateSelectedDay(selectedDay);
+      },
+      firstDay: DateTime.utc(2010, 10, 16),
+      lastDay: DateTime.utc(2030, 3, 14),
+      focusedDay: selectedDay,
+      calendarFormat: CalendarFormat.week,
+      startingDayOfWeek: StartingDayOfWeek.monday,
+      headerStyle: HeaderStyle(
+        leftChevronIcon: Icon(
+          Icons.chevron_left,
+          color: Get.isDarkMode ? secondaryDark : secondaryLight,
+          size: 32,
+        ),
+        rightChevronIcon: Icon(
+          Icons.chevron_right,
+          color: Get.isDarkMode ? secondaryDark : secondaryLight,
+          size: 32,
+        ),
+        titleTextStyle: Get.textTheme.titleMedium!.copyWith(
+          fontWeight: FontWeight.bold,
+        ),
+        titleCentered: true,
+        formatButtonVisible: false,
+      ),
+      daysOfWeekStyle: DaysOfWeekStyle(
+        weekdayStyle: TextStyle(
+          fontWeight: FontWeight.bold,
+          color: Get.isDarkMode ? secondaryDark : secondaryLight,
+        ),
+        weekendStyle: TextStyle(
+          fontWeight: FontWeight.bold,
+          color: Get.isDarkMode ? secondaryDark : secondaryLight,
+        ),
+      ),
+      calendarStyle: CalendarStyle(
+        defaultTextStyle: Theme.of(context).textTheme.bodyText2!.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
+        weekendTextStyle: Theme.of(context).textTheme.bodyText2!.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
+        outsideDaysVisible: false,
+        isTodayHighlighted: false,
+        defaultDecoration: BoxDecoration(
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        disabledDecoration: BoxDecoration(
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        outsideDecoration: BoxDecoration(
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        weekendDecoration: BoxDecoration(
+          shape: BoxShape.rectangle,
+          borderRadius: BorderRadius.circular(10),
+        ),
+        selectedDecoration: BoxDecoration(
+          shape: BoxShape.rectangle,
+          color: Get.isDarkMode ? secondaryDark : secondaryLight,
+          borderRadius: BorderRadius.circular(10),
+        ),
+      ),
+    );
+  }
+}
+
+class Tasks extends StatelessWidget {
+  Tasks({Key? key, required this.selectedDay}) : super(key: key);
+  final TaskController _taskController = Get.put(TaskController());
+  final DateTime selectedDay;
+
+  @override
+  Widget build(BuildContext context) {
+    print(_taskController.getTasks(DateTime(2022, 8, 30)).length);
+    for (final key in _taskController.tasks.keys) {
+      print('$key:');
+      for (var element in _taskController.tasks[key]!) {
+        element.printTask();
+      }
+    }
+
+    return SingleChildScrollView(
+      child: Obx(
+        () => Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            if (_taskController.getTasks(selectedDay).isEmpty)
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Lottie.asset(
+                    "assets/no_task_lottie.json",
+                  ),
+                  Text(
+                    'No Tasks',
+                    style: Theme.of(context).textTheme.displaySmall!.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
+                ],
+              ),
+            if (_taskController.getTasks(selectedDay).isNotEmpty)
+              for (final task in _taskController.getTasks(selectedDay))
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0),
+                  child: TaskCard(
+                    task: task,
+                  ),
+                ),
+          ],
+        ),
       ),
     );
   }
