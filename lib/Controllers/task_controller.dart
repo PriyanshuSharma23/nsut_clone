@@ -29,11 +29,15 @@ class TaskController extends GetxController {
     final tasks = prefs.getString(key);
     if (tasks != null) {
       this.tasks.value = (json.decode(tasks) as Map<String, dynamic>).map(
-          (key, value) => MapEntry(
-              key,
-              RxList<Task>.from((value as List<dynamic>)
-                  .map((task) => Task.fromJson(task))
-                  .toList())));
+        (key, value) => MapEntry(
+          key,
+          RxList<Task>.from(
+            (value as List<dynamic>)
+                .map((task) => Task.fromJson(task))
+                .toList(),
+          ),
+        ),
+      );
     }
   }
 

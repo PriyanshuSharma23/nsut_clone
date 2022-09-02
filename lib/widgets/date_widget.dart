@@ -12,7 +12,7 @@ class Date extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Text(
-          Day.todaysDay(),
+          Day.todaysDay(null),
           style: Theme.of(context).textTheme.titleMedium!.copyWith(
                 fontWeight: FontWeight.bold,
               ),

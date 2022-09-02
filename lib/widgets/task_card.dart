@@ -45,6 +45,7 @@ class TaskCard extends StatelessWidget {
       Expanded(
         child: Container(
           margin: const EdgeInsets.symmetric(horizontal: 10),
+          constraints: const BoxConstraints(minHeight: 150),
           decoration: BoxDecoration(
             color: Get.isDarkMode ? primaryDark : primaryLight,
             borderRadius: BorderRadius.circular(10),

@@ -58,12 +58,6 @@ class _HomePageState extends State<HomePage> {
           const NoticesScreen()
         ],
       ),
-      // body: BottomBarPageTransition(
-      //   builder: (context, index) => getBody(index),
-      //   currentIndex: _selectedIndex,
-      //   totalLength: 5,
-      //   transitionType: TransitionType.slide,
-      // ),
       bottomNavigationBar: Obx(
         () => BottomNavyBar(
           backgroundColor: Get.find<ThemeController>().themeData.brightness ==

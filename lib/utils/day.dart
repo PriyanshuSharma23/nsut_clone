@@ -24,8 +24,8 @@ final months = {
 };
 
 class Day {
-  static todaysDay() {
-    var now = DateTime.now();
+  static todaysDay(DateTime? date) {
+    var now = date ?? DateTime.now();
     var day = now.weekday - 1;
     return weekdays[day];
   }
@@ -40,11 +40,11 @@ class Day {
     return '$date$separator$month$separator$year';
   }
 
-  static dayMonth() {
-    var now = DateTime.now();
-    final int date = now.day;
+  static dayMonth(DateTime? date) {
+    var now = date ?? DateTime.now();
+    final int day = now.day;
     final String month = months[now.month]!;
-    return '$date $month';
+    return '$day $month';
   }
 
   static todaysDayIndex() {

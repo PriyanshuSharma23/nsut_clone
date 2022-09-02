@@ -36,11 +36,11 @@ class _TodoScreenState extends State<TodoScreen> {
               Column(
                 children: [
                   Text(
-                    Day.dayMonth(),
+                    Day.dayMonth(_selectedDay),
                     style: Theme.of(context).textTheme.titleMedium!.copyWith(),
                   ),
                   Text(
-                    Day.todaysDay(),
+                    Day.todaysDay(_selectedDay),
                     style: Theme.of(context).textTheme.titleMedium!.copyWith(
                           fontWeight: FontWeight.bold,
                         ),
