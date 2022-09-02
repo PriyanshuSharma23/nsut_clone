@@ -96,3 +96,4 @@ class _InitialSplashScreenState extends State<InitialSplashScreen> {
     );
   }
 }
+// this web dev course will be very useful in 1990s
